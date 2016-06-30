@@ -13,7 +13,7 @@ public class ApplicationConfig extends Application {
 	public Set<Class<?>> getClasses() {
 		final Set<Class<?>> classes = new HashSet<Class<?>>();
 
-		classes.add(LivroRest.class);
+		classes.add(UsuarioRest.class);
 		
 		return classes;
 	}
