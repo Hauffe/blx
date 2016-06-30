@@ -1,0 +1,3 @@
+blx\persistence\LivroDao.class
+blx\entity\Livro.class
+blx\persistence\HibernateUtil.class
