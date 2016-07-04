@@ -4,50 +4,68 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 /**
  * The persistent class for the BLX_CATEGORIA database table.
  * 
  */
 @Entity
-@Table(name="BLX_CATEGORIA")
-@NamedQuery(name="Categoria.findAll", query="SELECT b FROM Categoria b")
+@Table(name = "BLX_CATEGORIA")
+@NamedQuery(name = "Categoria.findAll", query = "SELECT b FROM Categoria b")
 public class Categoria implements Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final Long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BLX_CATEGORIA_CODCATEGORIA_GENERATOR", sequenceName="SEQ_ID_CATEGORIA", allocationSize = 1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BLX_CATEGORIA_CODCATEGORIA_GENERATOR")
-	@Column(name="COD_CATEGORIA")
-	private long codCategoria;
+	@SequenceGenerator(name = "BLX_CATEGORIA_CODCATEGORIA_GENERATOR", sequenceName = "SEQ_ID_CATEGORIA", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BLX_CATEGORIA_CODCATEGORIA_GENERATOR")
+	@Column(name = "COD_CATEGORIA")
+	private Long codCategoria;
 
-	@Column(name="DS_DESCRICAO")
+	@Column(name = "DS_DESCRICAO")
 	private String dsDescricao;
 
-	@Column(name="NM_NOME")
+	@Column(name = "NM_NOME")
 	private String nmNome;
 
-	//bi-directional many-to-one association to BlxAnuncio
-	@OneToMany(mappedBy="blxCategoria")
+	// bi-directional many-to-one association to BlxAnuncio
+	@OneToMany(mappedBy = "blxCategoria")
 	private List<Anuncio> blxAnuncios;
 
-	//bi-directional many-to-one association to Categoria
-	@ManyToOne
-	@JoinColumn(name="CATEGORIA_COD_CATEGORIA")
-	private Categoria blxCategoria;
+	// bi-directional many-to-one association to Categoria
+	/*
+	 * @ManyToOne
+	 * 
+	 * @JoinColumn(name = "CATEGORIA_COD_CATEGORIA") private Categoria
+	 * blxCategoria;
+	 */
 
-	//bi-directional many-to-one association to Categoria
-	@OneToMany(mappedBy="blxCategoria")
-	private List<Categoria> blxCategorias;
+	@Column(name = "CATEGORIA_COD_CATEGORIA")
+	private Long pk_categoria;
+
+	/*
+	 * //bi-directional many-to-one association to Categoria
+	 * 
+	 * @OneToMany(mappedBy="blxCategoria") private List<Categoria>
+	 * blxCategorias;
+	 */
 
 	public Categoria() {
 	}
 
-	public long getCodCategoria() {
+	public Categoria(Long codCategoria, String dsDescricao, String nmNome, List<Anuncio> blxAnuncios,
+			Long pk_categoria) {
+		super();
+		this.codCategoria = codCategoria;
+		this.dsDescricao = dsDescricao;
+		this.nmNome = nmNome;
+		this.blxAnuncios = blxAnuncios;
+		this.pk_categoria = pk_categoria;
+	}
+
+	public Long getCodCategoria() {
 		return this.codCategoria;
 	}
 
-	public void setCodCategoria(long codCategoria) {
+	public void setCodCategoria(Long codCategoria) {
 		this.codCategoria = codCategoria;
 	}
 
@@ -75,48 +93,12 @@ public class Categoria implements Serializable {
 		this.blxAnuncios = blxAnuncios;
 	}
 
-	public Anuncio addBlxAnuncio(Anuncio blxAnuncio) {
-		getBlxAnuncios().add(blxAnuncio);
-		blxAnuncio.setBlxCategoria(this);
-
-		return blxAnuncio;
+	public Long getPk_categoria() {
+		return pk_categoria;
 	}
 
-	public Anuncio removeBlxAnuncio(Anuncio blxAnuncio) {
-		getBlxAnuncios().remove(blxAnuncio);
-		blxAnuncio.setBlxCategoria(null);
-
-		return blxAnuncio;
-	}
-
-	public Categoria getBlxCategoria() {
-		return this.blxCategoria;
-	}
-
-	public void setBlxCategoria(Categoria blxCategoria) {
-		this.blxCategoria = blxCategoria;
-	}
-
-	public List<Categoria> getBlxCategorias() {
-		return this.blxCategorias;
-	}
-
-	public void setBlxCategorias(List<Categoria> blxCategorias) {
-		this.blxCategorias = blxCategorias;
-	}
-
-	public Categoria addBlxCategoria(Categoria blxCategoria) {
-		getBlxCategorias().add(blxCategoria);
-		blxCategoria.setBlxCategoria(this);
-
-		return blxCategoria;
-	}
-
-	public Categoria removeBlxCategoria(Categoria blxCategoria) {
-		getBlxCategorias().remove(blxCategoria);
-		blxCategoria.setBlxCategoria(null);
-
-		return blxCategoria;
+	public void setPk_categoria(Long pk_categoria) {
+		this.pk_categoria = pk_categoria;
 	}
 
 }

@@ -6,71 +6,110 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-
 /**
  * The persistent class for the BLX_ANUNCIO database table.
  * 
  */
 @Entity
-@Table(name="BLX_ANUNCIO")
-@NamedQuery(name="Anuncio.findAll", query="SELECT b FROM Anuncio b")
+@Table(name = "BLX_ANUNCIO")
+@NamedQuery(name = "Anuncio.findAll", query = "SELECT b FROM Anuncio b")
 public class Anuncio implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BLX_ANUNCIO_CODANUNCIO_GENERATOR", sequenceName="SEQ_ID_ANUNCIO", allocationSize = 1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BLX_ANUNCIO_CODANUNCIO_GENERATOR")
-	@Column(name="COD_ANUNCIO")
+	@SequenceGenerator(name = "BLX_ANUNCIO_CODANUNCIO_GENERATOR", sequenceName = "SEQ_ID_ANUNCIO", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BLX_ANUNCIO_CODANUNCIO_GENERATOR")
+	@Column(name = "COD_ANUNCIO")
 	private long codAnuncio;
 
-	@Column(name="DS_DESCRICAO")
+	@Column(name = "DS_DESCRICAO")
 	private String dsDescricao;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="DT_ANUNCIO")
+	@Column(name = "DT_ANUNCIO")
 	private Date dtAnuncio;
 
-	@Column(name="NM_NOME")
+	@Column(name = "NM_NOME")
 	private String nmNome;
 
-	@Column(name="VL_PRECO")
+	@Column(name = "VL_PRECO")
 	private double vlPreco;
 
-	@Column(name="VL_STATUS")
+	@Column(name = "VL_STATUS")
 	private BigDecimal vlStatus;
 
-	//bi-directional many-to-one association to BlxAlteracao
-	@OneToMany(mappedBy="blxAnuncio")
+	// bi-directional many-to-one association to BlxAlteracao
+	@OneToMany(mappedBy = "blxAnuncio")
 	private List<Alteracao> blxAlteracaos;
 
-	//bi-directional many-to-one association to BlxCategoria
-	@ManyToOne
-	@JoinColumn(name="CATEGORIA_COD_CATEGORIA")
-	private Categoria blxCategoria;
+	// bi-directional many-to-one association to BlxCategoria
+	/*
+	 * @ManyToOne(cascade = CascadeType.ALL)
+	 * 
+	 * @JoinColumn(name = "CATEGORIA_COD_CATEGORIA") private Categoria
+	 * blxCategoria;
+	 */
 
-	//bi-directional many-to-one association to BlxContato
-	@ManyToOne
-	@JoinColumn(name="CONTATO_COD_CONTATO")
-	private Contato blxContato;
+	@Column(name = "CATEGORIA_COD_CATEGORIA")
+	private long pk_categoria;
 
-	//bi-directional many-to-one association to BlxUsuario
-	@ManyToOne
-	@JoinColumn(name="USUARIO_COD_USUARIO")
-	private Usuario blxUsuario;
+	// bi-directional many-to-one association to BlxContato
+	/*
+	 * @ManyToOne(cascade = CascadeType.ALL)
+	 * 
+	 * @JoinColumn(name = "CONTATO_COD_CONTATO") private Contato blxContato;
+	 */
 
-	//bi-directional many-to-one association to BlxAvaliacao
-	@OneToMany(mappedBy="blxAnuncio")
+	@Column(name = "CONTATO_COD_CONTATO")
+	private long pk_contato;
+
+	// bi-directional many-to-one association to BlxUsuario
+	/*
+	 * @ManyToOne(cascade = CascadeType.ALL)
+	 * 
+	 * @JoinColumn(name = "USUARIO_COD_USUARIO") private Usuario blxUsuario;
+	 */
+
+	@Column(name = "USUARIO_COD_USUARIO")
+	private long pk_usuario;
+
+	// bi-directional many-to-one association to BlxAvaliacao
+	@OneToMany(mappedBy = "blxAnuncio")
 	private List<Avaliacao> blxAvaliacaos;
 
-	//bi-directional many-to-one association to BlxImagem
-	@OneToMany(mappedBy="blxAnuncio")
+	// bi-directional many-to-one association to BlxImagem
+	@OneToMany(mappedBy = "blxAnuncio")
 	private List<Imagem> blxImagems;
 
 	public Anuncio() {
 	}
 
+	public Anuncio(long codAnuncio, String dsDescricao, Date dtAnuncio, String nmNome, double vlPreco,
+			BigDecimal vlStatus) {
+		super();
+		this.codAnuncio = codAnuncio;
+		this.dsDescricao = dsDescricao;
+		this.dtAnuncio = dtAnuncio;
+		this.nmNome = nmNome;
+		this.vlPreco = vlPreco;
+		this.vlStatus = vlStatus;
+	}
+
+	public Anuncio(String dsDescricao, Date dtAnuncio, String nmNome, double vlPreco, BigDecimal vlStatus,
+			long pk_categoria, long pk_contato, long pk_usuario) {
+		super();
+		this.dsDescricao = dsDescricao;
+		this.dtAnuncio = dtAnuncio;
+		this.nmNome = nmNome;
+		this.vlPreco = vlPreco;
+		this.vlStatus = vlStatus;
+		this.pk_categoria = pk_categoria;
+		this.pk_contato = pk_contato;
+		this.pk_usuario = pk_usuario;
+	}
+
 	public long getCodAnuncio() {
-		return this.codAnuncio;
+		return codAnuncio;
 	}
 
 	public void setCodAnuncio(long codAnuncio) {
@@ -78,7 +117,7 @@ public class Anuncio implements Serializable {
 	}
 
 	public String getDsDescricao() {
-		return this.dsDescricao;
+		return dsDescricao;
 	}
 
 	public void setDsDescricao(String dsDescricao) {
@@ -86,7 +125,7 @@ public class Anuncio implements Serializable {
 	}
 
 	public Date getDtAnuncio() {
-		return this.dtAnuncio;
+		return dtAnuncio;
 	}
 
 	public void setDtAnuncio(Date dtAnuncio) {
@@ -94,7 +133,7 @@ public class Anuncio implements Serializable {
 	}
 
 	public String getNmNome() {
-		return this.nmNome;
+		return nmNome;
 	}
 
 	public void setNmNome(String nmNome) {
@@ -102,7 +141,7 @@ public class Anuncio implements Serializable {
 	}
 
 	public double getVlPreco() {
-		return this.vlPreco;
+		return vlPreco;
 	}
 
 	public void setVlPreco(double vlPreco) {
@@ -110,7 +149,7 @@ public class Anuncio implements Serializable {
 	}
 
 	public BigDecimal getVlStatus() {
-		return this.vlStatus;
+		return vlStatus;
 	}
 
 	public void setVlStatus(BigDecimal vlStatus) {
@@ -118,93 +157,60 @@ public class Anuncio implements Serializable {
 	}
 
 	public List<Alteracao> getBlxAlteracaos() {
-		return this.blxAlteracaos;
+		return blxAlteracaos;
 	}
 
 	public void setBlxAlteracaos(List<Alteracao> blxAlteracaos) {
 		this.blxAlteracaos = blxAlteracaos;
 	}
 
-	public Alteracao addBlxAlteracao(Alteracao blxAlteracao) {
-		getBlxAlteracaos().add(blxAlteracao);
-		blxAlteracao.setBlxAnuncio(this);
-
-		return blxAlteracao;
+	public long getPk_categoria() {
+		return pk_categoria;
 	}
 
-	public Alteracao removeBlxAlteracao(Alteracao blxAlteracao) {
-		getBlxAlteracaos().remove(blxAlteracao);
-		blxAlteracao.setBlxAnuncio(null);
-
-		return blxAlteracao;
+	public void setPk_categoria(long pk_categoria) {
+		this.pk_categoria = pk_categoria;
 	}
 
-	public Categoria getBlxCategoria() {
-		return this.blxCategoria;
+	public long getPk_contato() {
+		return pk_contato;
 	}
 
-	public void setBlxCategoria(Categoria blxCategoria) {
-		this.blxCategoria = blxCategoria;
+	public void setPk_contato(long pk_contato) {
+		this.pk_contato = pk_contato;
 	}
 
-	public Contato getBlxContato() {
-		return this.blxContato;
+	public long getPk_usuario() {
+		return pk_usuario;
 	}
 
-	public void setBlxContato(Contato blxContato) {
-		this.blxContato = blxContato;
-	}
-
-	public Usuario getBlxUsuario() {
-		return this.blxUsuario;
-	}
-
-	public void setBlxUsuario(Usuario blxUsuario) {
-		this.blxUsuario = blxUsuario;
+	public void setPk_usuario(long pk_usuario) {
+		this.pk_usuario = pk_usuario;
 	}
 
 	public List<Avaliacao> getBlxAvaliacaos() {
-		return this.blxAvaliacaos;
+		return blxAvaliacaos;
 	}
 
 	public void setBlxAvaliacaos(List<Avaliacao> blxAvaliacaos) {
 		this.blxAvaliacaos = blxAvaliacaos;
 	}
 
-	public Avaliacao addBlxAvaliacao(Avaliacao blxAvaliacao) {
-		getBlxAvaliacaos().add(blxAvaliacao);
-		blxAvaliacao.setBlxAnuncio(this);
-
-		return blxAvaliacao;
-	}
-
-	public Avaliacao removeBlxAvaliacao(Avaliacao blxAvaliacao) {
-		getBlxAvaliacaos().remove(blxAvaliacao);
-		blxAvaliacao.setBlxAnuncio(null);
-
-		return blxAvaliacao;
-	}
-
 	public List<Imagem> getBlxImagems() {
-		return this.blxImagems;
+		return blxImagems;
 	}
 
 	public void setBlxImagems(List<Imagem> blxImagems) {
 		this.blxImagems = blxImagems;
 	}
 
-	public Imagem addBlxImagem(Imagem blxImagem) {
-		getBlxImagems().add(blxImagem);
-		blxImagem.setBlxAnuncio(this);
-
-		return blxImagem;
+	@Override
+	public String toString() {
+		return "Anuncio [codAnuncio=" + codAnuncio + ", dsDescricao=" + dsDescricao + ", dtAnuncio=" + dtAnuncio
+				+ ", nmNome=" + nmNome + ", vlPreco=" + vlPreco + ", vlStatus=" + vlStatus + ", blxAlteracaos="
+				+ blxAlteracaos + ", pk_categoria=" + pk_categoria + ", pk_contato=" + pk_contato + ", pk_usuario="
+				+ pk_usuario + "]";
 	}
 
-	public Imagem removeBlxImagem(Imagem blxImagem) {
-		getBlxImagems().remove(blxImagem);
-		blxImagem.setBlxAnuncio(null);
-
-		return blxImagem;
-	}
 
 }

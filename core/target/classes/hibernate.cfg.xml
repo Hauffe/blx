@@ -13,8 +13,8 @@
 
 		<property name="current_session_context_class">thread</property>
 		<property name="hibernate.show_sql">true</property>
-		<!-- <property name="hbm2ddl.auto">update</property>  -->
- 		<property name="hibernate.validator.apply_to_ddl">false</property>
+<!-- 		<property name="hbm2ddl.auto">update</property>
+ --> 		<property name="hibernate.validator.apply_to_ddl">false</property>
 		<property name="hibernate.validator.autoregister_listeners">false</property>
 		
 		<mapping class="com.brq.blx.entity.Alteracao"/>

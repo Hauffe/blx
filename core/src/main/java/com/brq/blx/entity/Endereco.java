@@ -3,41 +3,54 @@ package com.brq.blx.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
 /**
  * The persistent class for the BLX_ENDERECO database table.
  * 
  */
 @Entity
-@Table(name="BLX_ENDERECO")
-@NamedQuery(name="Endereco.findAll", query="SELECT b FROM Endereco b")
+@Table(name = "BLX_ENDERECO")
+@NamedQuery(name = "Endereco.findAll", query = "SELECT b FROM Endereco b")
 public class Endereco implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BLX_ENDERECO_CODENDERECO_GENERATOR", sequenceName="SEQ_ID_ENDERECO", allocationSize = 1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BLX_ENDERECO_CODENDERECO_GENERATOR")
-	@Column(name="COD_ENDERECO")
+	@SequenceGenerator(name = "BLX_ENDERECO_CODENDERECO_GENERATOR", sequenceName = "SEQ_ID_ENDERECO", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BLX_ENDERECO_CODENDERECO_GENERATOR")
+	@Column(name = "COD_ENDERECO")
 	private long codEndereco;
 
-	@Column(name="VL_CEP")
+	@Column(name = "VL_CEP")
 	private String vlCep;
 
-	@Column(name="VL_CIDADE")
+	@Column(name = "VL_CIDADE")
 	private String vlCidade;
 
-	@Column(name="VL_RUA")
+	@Column(name = "VL_RUA")
 	private String vlRua;
 
-	@Column(name="VL_UF")
+	@Column(name = "VL_UF")
 	private String vlUf;
 
-	//bi-directional many-to-one association to BlxContato
-	@ManyToOne
-	@JoinColumn(name="CONTATO_COD_CONTATO")
-	private Contato blxContato;
+	// bi-directional many-to-one association to BlxContato
+	/*
+	 * @ManyToOne
+	 * 
+	 * @JoinColumn(name = "CONTATO_COD_CONTATO") private Contato blxContato;
+	 */
+
+	@Column(name = "CONTATO_COD_CONTATO")
+	private long pk_contato;
 
 	public Endereco() {
+	}
+
+	public Endereco(String vlCep, String vlCidade, String vlRua, String vlUf, long pk_contato) {
+		super();
+		this.vlCep = vlCep;
+		this.vlCidade = vlCidade;
+		this.vlRua = vlRua;
+		this.vlUf = vlUf;
+		this.pk_contato = pk_contato;
 	}
 
 	public long getCodEndereco() {
@@ -80,12 +93,12 @@ public class Endereco implements Serializable {
 		this.vlUf = vlUf;
 	}
 
-	public Contato getBlxContato() {
-		return this.blxContato;
+	public long getPk_contato() {
+		return pk_contato;
 	}
 
-	public void setBlxContato(Contato blxContato) {
-		this.blxContato = blxContato;
+	public void setPk_contato(long pk_contato) {
+		this.pk_contato = pk_contato;
 	}
 
 }

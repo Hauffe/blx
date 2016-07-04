@@ -4,26 +4,23 @@ package blx.persistence;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.brq.blx.entity.Anuncio;
 import com.brq.blx.entity.Usuario;
 
 
 
 
-public class UsuarioDao {
+public class AnuncioDao {
 
 		Session session;
 		Transaction transaction;
 		Query query;
 		
-		public void cadastrarUsuario (Usuario usuario) throws Exception
+		public void cadastrarAnuncio (Anuncio anuncio) throws Exception
 		{
 /*			  EntityManagerFactory factory = Persistence.
 			          createEntityManagerFactory("usuarios");
@@ -47,11 +44,11 @@ public class UsuarioDao {
 			
 			//gravar os dados na tabela livro
 	
-			System.out.println("É NÓIS2: " + usuario);
+			System.out.println("É NÓIS2: " + anuncio);
 
 /*				session.save(usuario.getBlxTipousuario());
-*/				session.save(usuario);
-				System.out.println("É NÓIS: " + usuario);
+*/				session.save(anuncio);
+				System.out.println("É NÓIS: " + anuncio);
 				session.flush();
 				transaction.commit();
 			
