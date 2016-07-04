@@ -1,3 +1,11 @@
-blx\persistence\LivroDao.class
-blx\entity\Livro.class
+com\brq\blx\entity\Anuncio.class
+blx\persistence\UsuarioDao.class
+com\brq\blx\entity\Categoria.class
+com\brq\blx\entity\Endereco.class
+com\brq\blx\entity\Contato.class
+com\brq\blx\entity\Tipousuario.class
+com\brq\blx\entity\Avaliacao.class
+com\brq\blx\entity\Usuario.class
+com\brq\blx\entity\Imagem.class
+com\brq\blx\entity\Alteracao.class
 blx\persistence\HibernateUtil.class

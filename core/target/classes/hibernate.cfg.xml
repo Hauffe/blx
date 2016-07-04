@@ -13,9 +13,19 @@
 
 		<property name="current_session_context_class">thread</property>
 		<property name="hibernate.show_sql">true</property>
-		<property name="hbm2ddl.auto">update</property>
-		<property name="hibernate.validator.apply_to_ddl">false</property>
+		<!-- <property name="hbm2ddl.auto">update</property>  -->
+ 		<property name="hibernate.validator.apply_to_ddl">false</property>
 		<property name="hibernate.validator.autoregister_listeners">false</property>
+		
+		<mapping class="com.brq.blx.entity.Alteracao"/>
+		<mapping class="com.brq.blx.entity.Anuncio"/> 
+	 	<mapping class="com.brq.blx.entity.Avaliacao"/>
+		<mapping class="com.brq.blx.entity.Categoria"/>
+		<mapping class="com.brq.blx.entity.Contato"/>
+		<mapping class="com.brq.blx.entity.Endereco"/>
+		<mapping class="com.brq.blx.entity.Imagem"/> 
+		<mapping class="com.brq.blx.entity.Tipousuario"/>
+		<mapping class="com.brq.blx.entity.Usuario"/>
 
 	</session-factory>
 
