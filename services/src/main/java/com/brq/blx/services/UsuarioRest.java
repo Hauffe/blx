@@ -12,11 +12,15 @@ import javax.ws.rs.core.Response;
 import com.brq.blx.entity.Anuncio;
 import com.brq.blx.entity.Categoria;
 import com.brq.blx.entity.Contato;
+import com.brq.blx.entity.Tipousuario;
 import com.brq.blx.entity.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import blx.persistence.AnuncioDao;
+import blx.persistence.CategoriaDao;
+import blx.persistence.TipoUsuarioDao;
+import blx.persistence.UsuarioDao;
 
 @Path("/usuario")
 public class UsuarioRest {
@@ -28,30 +32,11 @@ public class UsuarioRest {
 	{
 		JsonObject obj = new JsonObject();
 		try{
-			Usuario usuario = new Usuario(0, "12", "ex-23.com", "3412a", "1", "321", BigDecimal.valueOf((long) 0), (long) 0);
+			Tipousuario tipoUsuario = new TipoUsuarioDao().buscarPorId(1);
 			
-			Categoria vaiC = new Categoria((long) 3, "chá", "chá-verde", null, null);
-			Contato lele = new Contato((long)3, "lala", "lele");
-	
- 
-			Anuncio lala = new Anuncio("STAGS", new Date(), "Felipe", 50.,BigDecimal.valueOf((long) 0) , vaiC.getCodCategoria(), lele.getCodContato(), usuario.getCodUsuario());
-			//Usuario user = new Usuario(2, "nmNome", "vlEmail", "vlLogin", "vlRg", "vlSenha", null , null, null, aux);
-			/*Usuario user = new Usuario(null, "12", "ex-23.com", 
-					"3412a", "1", "321", BigDecimal.valueOf((long) 0), (long) 0);*/
+			Usuario usuario = new Usuario((long) 0, "RODRIGO SENPAI", "rodrigo@coti.com.brq","rodrigo_master", "898712-212", "1232", BigDecimal.valueOf((long) 0), null, null, tipoUsuario); 
 			
-			/*Tipousuario lala = new Tipousuario(0, null);*/
-			
-			/*Usuario usuario = new Usuario("12", "ex-23.com", 
-			"3412a", "1", "321", BigDecimal.valueOf((long) 0), lala);*/
-			
-		/*	new UsuarioDao().cadastrarUsuario(usuario);
-			obj.addProperty("result", "Usuário cadastrado!");
-		}catch(Exception e){
-			e.printStackTrace();
-			obj.addProperty("result", "Usuário nao cadastrado!");
-		}*/
-			
-			new AnuncioDao().cadastrarAnuncio(lala);
+			new UsuarioDao().cadastrar(usuario);
 			obj.addProperty("result", "Lala cadastrado!");
 		}catch(Exception e){
 			e.printStackTrace();
@@ -60,4 +45,28 @@ public class UsuarioRest {
 		return Response.ok(new Gson().toJson(obj)).build();
 	}
 	
+	@GET
+	@Path("/cadastrarAnuncio")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response cadastrarAnuncio()
+	{
+		JsonObject obj = new JsonObject();
+		try{
+			Usuario usuario = UsuarioDao.getInstance().buscarPorId(35);
+			
+			Categoria categoria = CategoriaDao.getInstance().buscarPorId(0);
+			Contato contato = new Contato((long) 0, "lala", "lele", usuario);
+			
+			Anuncio anuncio = new Anuncio((long) 0, "descricao", new Date(), "GIOVANI ANÚNCIO", 50.,BigDecimal.valueOf(0), categoria, contato, usuario );
+			
+			AnuncioDao.getInstance().cadastrar(anuncio);
+			obj.addProperty("result", "Anuncio cadastrado!");
+			
+		} catch(Exception e){
+			e.printStackTrace();
+			obj.addProperty("result", "Anuncio nao cadastrado!");
+		}
+		
+		return Response.ok(new Gson().toJson(obj)).build();
+	}
 }

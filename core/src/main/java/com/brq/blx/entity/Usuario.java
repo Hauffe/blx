@@ -63,33 +63,20 @@ public class Usuario implements Serializable {
 	private List<Contato> blxContatos;
 
 	// bi-directional many-to-one association to BlxTipousuario
-	/*
-	 * @ManyToOne(cascade = CascadeType.ALL)
-	 * 
-	 * @JoinColumn(name = "TIPOUSUARIO_COD_TIPOUSUARIO") private Tipousuario
-	 * blxTipousuario;
-	 */
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "TIPOUSUARIO_COD_TIPOUSUARIO")
+	private Tipousuario blxTipousuario;
 
-	@Column(name = "TIPOUSUARIO_COD_TIPOUSUARIO")
-	private long pk_tipousuario;
+	/*
+	 * @Column(name = "TIPOUSUARIO_COD_TIPOUSUARIO") private long
+	 * pk_tipousuario;
+	 */
 
 	public Usuario() {
 	}
 
-	public Usuario(String nmNome, String vlEmail, String vlLogin, String vlRg, String vlSenha, BigDecimal vlStatus,
-			long pk_tipousuario) {
-		super();
-		this.nmNome = nmNome;
-		this.vlEmail = vlEmail;
-		this.vlLogin = vlLogin;
-		this.vlRg = vlRg;
-		this.vlSenha = vlSenha;
-		this.vlStatus = vlStatus;
-		this.pk_tipousuario = pk_tipousuario;
-	}
-
 	public Usuario(long codUsuario, String nmNome, String vlEmail, String vlLogin, String vlRg, String vlSenha,
-			BigDecimal vlStatus, long pk_tipousuario) {
+			BigDecimal vlStatus, List<Anuncio> blxAnuncios, List<Contato> blxContatos, Tipousuario blxTipousuario) {
 		super();
 		this.codUsuario = codUsuario;
 		this.nmNome = nmNome;
@@ -98,7 +85,9 @@ public class Usuario implements Serializable {
 		this.vlRg = vlRg;
 		this.vlSenha = vlSenha;
 		this.vlStatus = vlStatus;
-		this.pk_tipousuario = pk_tipousuario;
+		this.blxAnuncios = blxAnuncios;
+		this.blxContatos = blxContatos;
+		this.blxTipousuario = blxTipousuario;
 	}
 
 	public long getCodUsuario() {
@@ -165,16 +154,6 @@ public class Usuario implements Serializable {
 		this.blxAnuncios = blxAnuncios;
 	}
 
-
-
-	public long getPk_tipousuario() {
-		return pk_tipousuario;
-	}
-
-	public void setPk_tipousuario(long pk_tipousuario) {
-		this.pk_tipousuario = pk_tipousuario;
-	}
-
 	public List<Contato> getBlxContatos() {
 		return this.blxContatos;
 	}
@@ -183,10 +162,17 @@ public class Usuario implements Serializable {
 		this.blxContatos = blxContatos;
 	}
 
-
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	
+
+	public Tipousuario getBlxTipousuario() {
+		return blxTipousuario;
+	}
+
+	public void setBlxTipousuario(Tipousuario blxTipousuario) {
+		this.blxTipousuario = blxTipousuario;
 	}
 
 	@Override

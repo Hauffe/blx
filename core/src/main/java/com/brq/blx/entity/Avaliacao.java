@@ -28,24 +28,28 @@ public class Avaliacao implements Serializable {
 	private String vlNota;
 
 	// bi-directional many-to-one association to BlxAnuncio
-	/*
-	 * @ManyToOne
-	 * 
-	 * @JoinColumn(name="ANUNCIO_COD_ANUNCIO") private Anuncio blxAnuncio;
-	 */
+	 @ManyToOne
+	 @JoinColumn(name="ANUNCIO_COD_ANUNCIO")
+	 private Anuncio blxAnuncio;
+	 
 
-	@Column(name = "ANUNCIO_COD_ANUNCIO")
-	private long pk_anuncio;
+	/*@Column(name = "ANUNCIO_COD_ANUNCIO")
+	private long pk_anuncio;*/
 
 	public Avaliacao() {
 	}
 
-	public Avaliacao(long codAvaliacao, Date dtAvaliacao, String vlNota) {
+	
+
+	public Avaliacao(long codAvaliacao, Date dtAvaliacao, String vlNota, Anuncio blxAnuncio) {
 		super();
 		this.codAvaliacao = codAvaliacao;
 		this.dtAvaliacao = dtAvaliacao;
 		this.vlNota = vlNota;
+		this.blxAnuncio = blxAnuncio;
 	}
+
+
 
 	public long getCodAvaliacao() {
 		return this.codAvaliacao;
@@ -69,14 +73,6 @@ public class Avaliacao implements Serializable {
 
 	public void setVlNota(String vlNota) {
 		this.vlNota = vlNota;
-	}
-
-	public long getPk_anuncio() {
-		return pk_anuncio;
-	}
-
-	public void setPk_anuncio(long pk_anuncio) {
-		this.pk_anuncio = pk_anuncio;
 	}
 
 }

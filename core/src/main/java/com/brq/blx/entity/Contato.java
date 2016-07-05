@@ -31,14 +31,12 @@ public class Contato implements Serializable {
 	private List<Anuncio> blxAnuncios;
 
 	// bi-directional many-to-one association to BlxUsuario
-	/*
-	 * @ManyToOne
-	 * 
-	 * @JoinColumn(name = "USUARIO_COD_USUARIO") private Usuario blxUsuario;
-	 */
+	 @ManyToOne
+	 @JoinColumn(name = "USUARIO_COD_USUARIO") private Usuario blxUsuario;
+	 
 
-	@Column(name = "USUARIO_COD_USUARIO")
-	private long pk_usuario;
+	/*@Column(name = "USUARIO_COD_USUARIO")
+	private long pk_usuario;*/
 
 	// bi-directional many-to-one association to BlxEndereco
 	@OneToMany(mappedBy = "blxContato")
@@ -54,14 +52,26 @@ public class Contato implements Serializable {
 		this.vlTelefonemovel = vlTelefonemovel;
 	}
 
+	
+	
+
+
+	public Contato(long codContato, String vlTelefonefixo, String vlTelefonemovel, Usuario blxUsuario) {
+		super();
+		this.codContato = codContato;
+		this.vlTelefonefixo = vlTelefonefixo;
+		this.vlTelefonemovel = vlTelefonemovel;
+		this.blxUsuario = blxUsuario;
+	}
+
 	public Contato(long codContato, String vlTelefonefixo, String vlTelefonemovel, List<Anuncio> blxAnuncios,
-			long pk_usuario, List<Endereco> blxEnderecos) {
+			Usuario blxUsuario, List<Endereco> blxEnderecos) {
 		super();
 		this.codContato = codContato;
 		this.vlTelefonefixo = vlTelefonefixo;
 		this.vlTelefonemovel = vlTelefonemovel;
 		this.blxAnuncios = blxAnuncios;
-		this.pk_usuario = pk_usuario;
+		this.blxUsuario = blxUsuario;
 		this.blxEnderecos = blxEnderecos;
 	}
 
@@ -95,16 +105,6 @@ public class Contato implements Serializable {
 
 	public void setBlxAnuncios(List<Anuncio> blxAnuncios) {
 		this.blxAnuncios = blxAnuncios;
-	}
-
-
-
-	public long getPk_usuario() {
-		return pk_usuario;
-	}
-
-	public void setPk_usuario(long pk_usuario) {
-		this.pk_usuario = pk_usuario;
 	}
 
 	public List<Endereco> getBlxEnderecos() {

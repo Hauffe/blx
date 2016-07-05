@@ -12,7 +12,11 @@ import java.util.List;
 @Table(name = "BLX_CATEGORIA")
 @NamedQuery(name = "Categoria.findAll", query = "SELECT b FROM Categoria b")
 public class Categoria implements Serializable {
-	private static final Long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 
 	@Id
 	@SequenceGenerator(name = "BLX_CATEGORIA_CODCATEGORIA_GENERATOR", sequenceName = "SEQ_ID_CATEGORIA", allocationSize = 1)
@@ -31,15 +35,14 @@ public class Categoria implements Serializable {
 	private List<Anuncio> blxAnuncios;
 
 	// bi-directional many-to-one association to Categoria
-	/*
-	 * @ManyToOne
-	 * 
-	 * @JoinColumn(name = "CATEGORIA_COD_CATEGORIA") private Categoria
-	 * blxCategoria;
-	 */
 
-	@Column(name = "CATEGORIA_COD_CATEGORIA")
-	private Long pk_categoria;
+	 @ManyToOne 
+	 @JoinColumn(name = "CATEGORIA_COD_CATEGORIA") 
+	 private Categoria blxCategoria;
+	 
+
+	/*@Column(name = "CATEGORIA_COD_CATEGORIA")
+	private Long pk_categoria;*/
 
 	/*
 	 * //bi-directional many-to-one association to Categoria
@@ -51,15 +54,19 @@ public class Categoria implements Serializable {
 	public Categoria() {
 	}
 
+
+
 	public Categoria(Long codCategoria, String dsDescricao, String nmNome, List<Anuncio> blxAnuncios,
-			Long pk_categoria) {
+			Categoria blxCategoria) {
 		super();
 		this.codCategoria = codCategoria;
 		this.dsDescricao = dsDescricao;
 		this.nmNome = nmNome;
 		this.blxAnuncios = blxAnuncios;
-		this.pk_categoria = pk_categoria;
+		this.blxCategoria = blxCategoria;
 	}
+
+
 
 	public Long getCodCategoria() {
 		return this.codCategoria;
@@ -93,12 +100,6 @@ public class Categoria implements Serializable {
 		this.blxAnuncios = blxAnuncios;
 	}
 
-	public Long getPk_categoria() {
-		return pk_categoria;
-	}
 
-	public void setPk_categoria(Long pk_categoria) {
-		this.pk_categoria = pk_categoria;
-	}
 
 }

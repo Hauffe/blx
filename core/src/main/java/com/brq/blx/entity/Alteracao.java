@@ -28,12 +28,12 @@ public class Alteracao implements Serializable {
 	private Date vlAlteracao;
 
 	// bi-directional many-to-one association to BlxAnuncio
-/*	@ManyToOne
+	@ManyToOne
 	@JoinColumn(name = "ANUNCIO_COD_ANUNCIO")
-	private Anuncio blxAnuncio;*/
+	private Anuncio blxAnuncio;
 	
-	@Column(name = "ANUNCIO_COD_ANUNCIO")
-	private long pk_anuncio;
+/*	@Column(name = "ANUNCIO_COD_ANUNCIO")
+	private long pk_anuncio;*/
 
 	public Alteracao() {
 	}
@@ -69,13 +69,7 @@ public class Alteracao implements Serializable {
 		this.vlAlteracao = vlAlteracao;
 	}
 
-	public long getPk_anuncio() {
-		return pk_anuncio;
-	}
 
-	public void setPk_anuncio(long pk_anuncio) {
-		this.pk_anuncio = pk_anuncio;
-	}
 
 
 

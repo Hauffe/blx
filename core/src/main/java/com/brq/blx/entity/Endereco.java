@@ -32,26 +32,29 @@ public class Endereco implements Serializable {
 	private String vlUf;
 
 	// bi-directional many-to-one association to BlxContato
-	/*
-	 * @ManyToOne
-	 * 
-	 * @JoinColumn(name = "CONTATO_COD_CONTATO") private Contato blxContato;
-	 */
+	@ManyToOne
+	@JoinColumn(name = "CONTATO_COD_CONTATO") private Contato blxContato;
+	 
 
-	@Column(name = "CONTATO_COD_CONTATO")
-	private long pk_contato;
+/*	@Column(name = "CONTATO_COD_CONTATO")
+	private long pk_contato;*/
 
 	public Endereco() {
 	}
 
-	public Endereco(String vlCep, String vlCidade, String vlRua, String vlUf, long pk_contato) {
+
+
+	public Endereco(long codEndereco, String vlCep, String vlCidade, String vlRua, String vlUf, Contato blxContato) {
 		super();
+		this.codEndereco = codEndereco;
 		this.vlCep = vlCep;
 		this.vlCidade = vlCidade;
 		this.vlRua = vlRua;
 		this.vlUf = vlUf;
-		this.pk_contato = pk_contato;
+		this.blxContato = blxContato;
 	}
+
+
 
 	public long getCodEndereco() {
 		return this.codEndereco;
@@ -93,12 +96,5 @@ public class Endereco implements Serializable {
 		this.vlUf = vlUf;
 	}
 
-	public long getPk_contato() {
-		return pk_contato;
-	}
-
-	public void setPk_contato(long pk_contato) {
-		this.pk_contato = pk_contato;
-	}
 
 }

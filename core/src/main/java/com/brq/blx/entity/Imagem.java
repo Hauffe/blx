@@ -26,12 +26,14 @@ public class Imagem implements Serializable {
 	@Column(name="VL_CAMINHO")
 	private String vlCaminho;
 
-	/*//bi-directional many-to-one association to BlxAnuncio
+	//bi-directional many-to-one association to BlxAnuncio
 	@ManyToOne
-	@JoinColumn(name="ANUNCIO_COD_ANUNCIO")*/
+	@JoinColumn(name="ANUNCIO_COD_ANUNCIO")
+	private Anuncio blxAnuncio;
 	
-	@Column(name="ANUNCIO_COD_ANUNCIO")
-	private long pk_anuncio;
+	
+	/*@Column(name="ANUNCIO_COD_ANUNCIO")
+	private long pk_anuncio;*/
 
 	public Imagem() {
 	}
@@ -60,18 +62,14 @@ public class Imagem implements Serializable {
 		this.vlCaminho = vlCaminho;
 	}
 
-	public long getPk_anuncio() {
-		return pk_anuncio;
+	public Anuncio getBlxAnuncio() {
+		return blxAnuncio;
 	}
 
-	public void setPk_anuncio(long pk_anuncio) {
-		this.pk_anuncio = pk_anuncio;
+	public void setBlxAnuncio(Anuncio blxAnuncio) {
+		this.blxAnuncio = blxAnuncio;
 	}
 	
-	
-
-
-
 	
 
 }

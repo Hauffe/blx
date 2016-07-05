@@ -14,6 +14,7 @@ import java.util.List;
 @Table(name = "BLX_ANUNCIO")
 @NamedQuery(name = "Anuncio.findAll", query = "SELECT b FROM Anuncio b")
 public class Anuncio implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -38,54 +39,32 @@ public class Anuncio implements Serializable {
 	@Column(name = "VL_STATUS")
 	private BigDecimal vlStatus;
 
-	// bi-directional many-to-one association to BlxAlteracao
-	@OneToMany(mappedBy = "blxAnuncio")
-	private List<Alteracao> blxAlteracaos;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "CATEGORIA_COD_CATEGORIA")
+	private Categoria blxCategoria;
 
-	// bi-directional many-to-one association to BlxCategoria
-	/*
-	 * @ManyToOne(cascade = CascadeType.ALL)
-	 * 
-	 * @JoinColumn(name = "CATEGORIA_COD_CATEGORIA") private Categoria
-	 * blxCategoria;
-	 */
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "CONTATO_COD_CONTATO")
+	private Contato blxContato;
 
-	@Column(name = "CATEGORIA_COD_CATEGORIA")
-	private long pk_categoria;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "USUARIO_COD_USUARIO")
+	private Usuario blxUsuario;
 
-	// bi-directional many-to-one association to BlxContato
-	/*
-	 * @ManyToOne(cascade = CascadeType.ALL)
-	 * 
-	 * @JoinColumn(name = "CONTATO_COD_CONTATO") private Contato blxContato;
-	 */
-
-	@Column(name = "CONTATO_COD_CONTATO")
-	private long pk_contato;
-
-	// bi-directional many-to-one association to BlxUsuario
-	/*
-	 * @ManyToOne(cascade = CascadeType.ALL)
-	 * 
-	 * @JoinColumn(name = "USUARIO_COD_USUARIO") private Usuario blxUsuario;
-	 */
-
-	@Column(name = "USUARIO_COD_USUARIO")
-	private long pk_usuario;
-
-	// bi-directional many-to-one association to BlxAvaliacao
 	@OneToMany(mappedBy = "blxAnuncio")
 	private List<Avaliacao> blxAvaliacaos;
 
-	// bi-directional many-to-one association to BlxImagem
 	@OneToMany(mappedBy = "blxAnuncio")
 	private List<Imagem> blxImagems;
+
+	@OneToMany(mappedBy = "blxAnuncio")
+	private List<Alteracao> blxAlteracaos;
 
 	public Anuncio() {
 	}
 
 	public Anuncio(long codAnuncio, String dsDescricao, Date dtAnuncio, String nmNome, double vlPreco,
-			BigDecimal vlStatus) {
+			BigDecimal vlStatus, Categoria blxCategoria, Contato blxContato, Usuario blxUsuario) {
 		super();
 		this.codAnuncio = codAnuncio;
 		this.dsDescricao = dsDescricao;
@@ -93,19 +72,9 @@ public class Anuncio implements Serializable {
 		this.nmNome = nmNome;
 		this.vlPreco = vlPreco;
 		this.vlStatus = vlStatus;
-	}
-
-	public Anuncio(String dsDescricao, Date dtAnuncio, String nmNome, double vlPreco, BigDecimal vlStatus,
-			long pk_categoria, long pk_contato, long pk_usuario) {
-		super();
-		this.dsDescricao = dsDescricao;
-		this.dtAnuncio = dtAnuncio;
-		this.nmNome = nmNome;
-		this.vlPreco = vlPreco;
-		this.vlStatus = vlStatus;
-		this.pk_categoria = pk_categoria;
-		this.pk_contato = pk_contato;
-		this.pk_usuario = pk_usuario;
+		this.blxCategoria = blxCategoria;
+		this.blxContato = blxContato;
+		this.blxUsuario = blxUsuario;
 	}
 
 	public long getCodAnuncio() {
@@ -164,30 +133,6 @@ public class Anuncio implements Serializable {
 		this.blxAlteracaos = blxAlteracaos;
 	}
 
-	public long getPk_categoria() {
-		return pk_categoria;
-	}
-
-	public void setPk_categoria(long pk_categoria) {
-		this.pk_categoria = pk_categoria;
-	}
-
-	public long getPk_contato() {
-		return pk_contato;
-	}
-
-	public void setPk_contato(long pk_contato) {
-		this.pk_contato = pk_contato;
-	}
-
-	public long getPk_usuario() {
-		return pk_usuario;
-	}
-
-	public void setPk_usuario(long pk_usuario) {
-		this.pk_usuario = pk_usuario;
-	}
-
 	public List<Avaliacao> getBlxAvaliacaos() {
 		return blxAvaliacaos;
 	}
@@ -208,9 +153,7 @@ public class Anuncio implements Serializable {
 	public String toString() {
 		return "Anuncio [codAnuncio=" + codAnuncio + ", dsDescricao=" + dsDescricao + ", dtAnuncio=" + dtAnuncio
 				+ ", nmNome=" + nmNome + ", vlPreco=" + vlPreco + ", vlStatus=" + vlStatus + ", blxAlteracaos="
-				+ blxAlteracaos + ", pk_categoria=" + pk_categoria + ", pk_contato=" + pk_contato + ", pk_usuario="
-				+ pk_usuario + "]";
+				+ blxAlteracaos + "]";
 	}
-
 
 }

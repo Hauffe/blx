@@ -1,7 +1,18 @@
 package com.brq.blx.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 
 
@@ -25,8 +36,8 @@ public class Tipousuario implements Serializable {
 	private String vlTipo;
 
 	//bi-directional many-to-one association to BlxUsuario
-/*	@OneToMany(mappedBy="blxTipousuario")
-	private List<Usuario> blxUsuarios;*/
+	@OneToMany(mappedBy="blxTipousuario", fetch=FetchType.EAGER)
+	private List<Usuario> blxUsuarios;
 	
 
 	public Tipousuario() {
@@ -54,5 +65,12 @@ public class Tipousuario implements Serializable {
 	public void setVlTipo(String vlTipo) {
 		this.vlTipo = vlTipo;
 	}
+
+	@Override
+	public String toString() {
+		return "Tipousuario [codTipousuario=" + codTipousuario + ", vlTipo=" + vlTipo + "]";
+	}
+	
+	
 
 }
