@@ -21,7 +21,7 @@ public class CategoriaDao extends PatternDAO<Categoria> {
 	}
 
 	@Override
-	public Categoria buscarPorId(Integer id) {
+	public Categoria buscarPorId(Integer id) throws Exception {
 
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
@@ -48,20 +48,22 @@ public class CategoriaDao extends PatternDAO<Categoria> {
 	}
 
 	@Override
-	public boolean cadastrar(Categoria object) {
+	public boolean cadastrar(Categoria object) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean atualizar(Categoria object) {
+	public boolean atualizar(Categoria object) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public List<Categoria> buscarTodos() {
+	public List<Categoria> buscarTodos() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 }

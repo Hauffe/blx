@@ -20,7 +20,7 @@ public class AvaliacaoDao extends PatternDAO<Avaliacao> {
 	}
 	
 	@Override
-	public Avaliacao buscarPorId(Integer id) {
+	public Avaliacao buscarPorId(Integer id){
 		session = HibernateUtil.getSessionFactory().openSession();
 		query = session.createQuery("FROM Avaliacao WHERE codAvaliacao = ?");
 		
@@ -37,20 +37,22 @@ public class AvaliacaoDao extends PatternDAO<Avaliacao> {
 	}
 
 	@Override
-	public boolean cadastrar(Avaliacao object) {
+	public boolean cadastrar(Avaliacao object) throws Exception{
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean atualizar(Avaliacao object) {
+	public boolean atualizar(Avaliacao object)throws Exception {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public List<Avaliacao> buscarTodos() {
+	public List<Avaliacao> buscarTodos() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 }

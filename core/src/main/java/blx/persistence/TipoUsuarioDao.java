@@ -21,19 +21,7 @@ public class TipoUsuarioDao extends PatternDAO<Tipousuario> {
 	}
 
 	@Override
-	public boolean cadastrar(Tipousuario object) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean atualizar(Tipousuario object) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Tipousuario buscarPorId(Integer id) {
+	public Tipousuario buscarPorId(Integer id) throws Exception {
 		
 		try
 		{
@@ -57,12 +45,29 @@ public class TipoUsuarioDao extends PatternDAO<Tipousuario> {
 		}
 		
 	}
+	
+	
 
 	@Override
-	public List<Tipousuario> buscarTodos() {
+	public boolean cadastrar(Tipousuario object) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean atualizar(Tipousuario object) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<Tipousuario> buscarTodos() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+
+
 
 
 

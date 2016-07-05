@@ -19,6 +19,7 @@ public class EnderecoDao extends PatternDAO<Endereco> {
 		return instance;
 	}
 	
+	@Override
 	public Endereco buscarPorId(Integer id) {
 		session = HibernateUtil.getSessionFactory().openSession();
 		query = session.createQuery("FROM Endereco WHERE codEndereco = ?");
@@ -36,21 +37,23 @@ public class EnderecoDao extends PatternDAO<Endereco> {
 	}
 
 	@Override
-	public boolean cadastrar(Endereco object) {
+	public boolean cadastrar(Endereco object) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean atualizar(Endereco object) {
+	public boolean atualizar(Endereco object) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public List<Endereco> buscarTodos() {
+	public List<Endereco> buscarTodos() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 }

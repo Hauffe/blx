@@ -4,12 +4,12 @@ import java.util.List;
 
 public abstract class PatternDAO<T> {
 
-	public abstract boolean cadastrar(T object);
+	public abstract boolean cadastrar(T object) throws Exception;
 	
-	public abstract boolean atualizar(T object);
+	public abstract boolean atualizar(T object)throws Exception;
 	
-	public abstract T buscarPorId(Integer id);
+	public abstract T buscarPorId(Integer id)throws Exception;
 	
-	public abstract List<T> buscarTodos();
+	public abstract List<T> buscarTodos() throws Exception;
 	
 }

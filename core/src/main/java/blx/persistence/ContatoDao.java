@@ -19,7 +19,7 @@ public class ContatoDao extends PatternDAO<Contato> {
 		return instance;
 	}
 	
-	public Contato buscarPorId(Integer id) {
+	public Contato buscarPorId(Integer id) throws Exception {
 		session = HibernateUtil.getSessionFactory().openSession();
 		query = session.createQuery("FROM Contato WHERE codContato = ?");
 		
@@ -36,20 +36,22 @@ public class ContatoDao extends PatternDAO<Contato> {
 	}
 
 	@Override
-	public boolean cadastrar(Contato object) {
+	public boolean cadastrar(Contato object) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean atualizar(Contato object) {
+	public boolean atualizar(Contato object) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public List<Contato> buscarTodos() {
+	public List<Contato> buscarTodos() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 }
