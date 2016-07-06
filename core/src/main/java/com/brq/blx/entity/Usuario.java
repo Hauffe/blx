@@ -11,6 +11,7 @@ import java.util.List;
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	
 	/*
 	 * Solução do problema referente a sequência do Hibernate: Primeiramente
 	 * você deve colocar a anotação [ allocationSize = 1 ] dentro da
@@ -21,8 +22,7 @@ public class Usuario implements Serializable {
 	/*
 	 * OBSERVE: ALGUMAS COLUNAS QUE DEVERIAM POSSUIR A ATRIBUIÇÃO "UNIQUE" NÃO
 	 * POSSUEM A CARACTERÍSTICA DE VALOR "ÚNICO", POIS ESTAMOS EM FASE DE TESTE
-	 * LOGO MAIS ADICIONAREMOS NAs ANOTAÇÕES @Column a anotação: (unique = true)
-	 * e garantir a unicidade dos valores
+	 * LOGO MAIS ADICIONAREMOS NAS ANOTAÇÕES @Column a anotação: (unique = true)
 	 */
 
 	@Id
