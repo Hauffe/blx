@@ -22,48 +22,33 @@ public class CategoriaDao extends PatternDAO<Categoria> {
 
 	@Override
 	public Categoria buscarPorId(Integer id) throws Exception {
+		session = HibernateUtil.getSessionFactory().openSession();
+		query = session.createQuery("FROM Categoria WHERE codCategoria = ?");
 
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			query = session.createQuery("FROM Categoria WHERE codCategoria = ?");
+		query.setInteger(0, id);
 
-			
-			query.setInteger(0, id);
+		@SuppressWarnings("unchecked")
+		List<Categoria> categorias = query.list();
 
-			@SuppressWarnings("unchecked")
-			List<Categoria> categorias = query.list();
+		System.out.println("CATEGORIA FOUND: " + categorias.get(0));
 
-			System.out.println("CATEGORIA FOUND: " + categorias.get(0));
+		session.close();
 
-			session.close();
-
-			return categorias.get(0);
-
-		} catch (Exception error) {
-			error.printStackTrace();
-			return null;
-
-		}
-
+		return categorias.get(0);
 	}
 
 	@Override
-	public boolean cadastrar(Categoria object) throws Exception {
-		// TODO Auto-generated method stub
+	public boolean cadastrar(Categoria categoria) throws Exception {
 		return false;
 	}
 
 	@Override
-	public boolean atualizar(Categoria object) throws Exception {
-		// TODO Auto-generated method stub
+	public boolean atualizar(Categoria categoria) throws Exception {
 		return false;
 	}
 
 	@Override
 	public List<Categoria> buscarTodos() throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
-
-
 }

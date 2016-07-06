@@ -11,5 +11,4 @@ public abstract class PatternDAO<T> {
 	public abstract T buscarPorId(Integer id)throws Exception;
 	
 	public abstract List<T> buscarTodos() throws Exception;
-	
 }

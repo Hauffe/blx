@@ -6,9 +6,9 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.brq.blx.entity.Tipousuario;
+import com.brq.blx.entity.TipoUsuario;
 
-public class TipoUsuarioDao extends PatternDAO<Tipousuario> {
+public class TipoUsuarioDao extends PatternDAO<TipoUsuario> {
 	
 	Session session;
 	Transaction transaction;
@@ -21,54 +21,34 @@ public class TipoUsuarioDao extends PatternDAO<Tipousuario> {
 	}
 
 	@Override
-	public Tipousuario buscarPorId(Integer id) throws Exception {
+	public TipoUsuario buscarPorId(Integer id) throws Exception {
+		session = HibernateUtil.getSessionFactory().openSession();
+		query = session.createQuery("FROM TipoUsuario WHERE codTipoUsuario = ?");
 		
-		try
-		{
-			session = HibernateUtil.getSessionFactory().openSession();
-			query = session.createQuery("FROM Tipousuario WHERE codTipousuario = ?");
-			
-			
-			@SuppressWarnings("unchecked")
-			List<Tipousuario> user = query.list();
-			
-			System.out.println("TipoUsuario FOUND: " + user.get(0));
-			
-			session.close();
-			
-			return user.get(0);
-			
-		}catch (Exception error)
-		{
-			error.printStackTrace();
-			return null;
-		}
+		query.setInteger(0, id);
 		
+		@SuppressWarnings("unchecked")
+		List<TipoUsuario> user = query.list();
+		
+		System.out.println("TipoUsuario FOUND: " + user.get(0));
+		
+		session.close();
+		
+		return user.get(0);
 	}
 	
-	
-
 	@Override
-	public boolean cadastrar(Tipousuario object) throws Exception {
-		// TODO Auto-generated method stub
+	public boolean cadastrar(TipoUsuario tipoUsuario) throws Exception {
 		return false;
 	}
 
 	@Override
-	public boolean atualizar(Tipousuario object) throws Exception {
-		// TODO Auto-generated method stub
+	public boolean atualizar(TipoUsuario tipoUsuario) throws Exception {
 		return false;
 	}
 
 	@Override
-	public List<Tipousuario> buscarTodos() throws Exception {
-		// TODO Auto-generated method stub
+	public List<TipoUsuario> buscarTodos() throws Exception {
 		return null;
 	}
-	
-
-
-
-
-
 }

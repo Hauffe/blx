@@ -37,23 +37,17 @@ public class EnderecoDao extends PatternDAO<Endereco> {
 	}
 
 	@Override
-	public boolean cadastrar(Endereco object) throws Exception {
-		// TODO Auto-generated method stub
+	public boolean cadastrar(Endereco endereco) throws Exception {
 		return false;
 	}
 
 	@Override
-	public boolean atualizar(Endereco object) throws Exception {
-		// TODO Auto-generated method stub
+	public boolean atualizar(Endereco endereco) throws Exception {
 		return false;
 	}
 
 	@Override
 	public List<Endereco> buscarTodos() throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
-
-
-
 }

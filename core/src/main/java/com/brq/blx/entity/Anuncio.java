@@ -6,10 +6,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-/**
- * The persistent class for the BLX_ANUNCIO database table.
- * 
- */
 @Entity
 @Table(name = "BLX_ANUNCIO")
 @NamedQuery(name = "Anuncio.findAll", query = "SELECT b FROM Anuncio b")
@@ -38,7 +34,20 @@ public class Anuncio implements Serializable {
 
 	@Column(name = "VL_STATUS")
 	private BigDecimal vlStatus;
+	
+	/* RELAÇÔES */
 
+	@OneToMany(mappedBy = "blxAnuncio")
+	private List<Avaliacao> blxAvaliacaos;
+
+	@OneToMany(mappedBy = "blxAnuncio")
+	private List<Imagem> blxImagems;
+
+	@OneToMany(mappedBy = "blxAnuncio")
+	private List<Alteracao> blxAlteracaos;
+	
+	/* RELAÇÕES JOINCOLUMN */
+	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "CATEGORIA_COD_CATEGORIA")
 	private Categoria blxCategoria;
@@ -51,17 +60,7 @@ public class Anuncio implements Serializable {
 	@JoinColumn(name = "USUARIO_COD_USUARIO")
 	private Usuario blxUsuario;
 
-	@OneToMany(mappedBy = "blxAnuncio")
-	private List<Avaliacao> blxAvaliacaos;
-
-	@OneToMany(mappedBy = "blxAnuncio")
-	private List<Imagem> blxImagems;
-
-	@OneToMany(mappedBy = "blxAnuncio")
-	private List<Alteracao> blxAlteracaos;
-
-	public Anuncio() {
-	}
+	public Anuncio() {}
 
 	public Anuncio(long codAnuncio, String dsDescricao, Date dtAnuncio, String nmNome, double vlPreco,
 			BigDecimal vlStatus, Categoria blxCategoria, Contato blxContato, Usuario blxUsuario) {
@@ -155,5 +154,4 @@ public class Anuncio implements Serializable {
 				+ ", nmNome=" + nmNome + ", vlPreco=" + vlPreco + ", vlStatus=" + vlStatus + ", blxAlteracaos="
 				+ blxAlteracaos + "]";
 	}
-
 }

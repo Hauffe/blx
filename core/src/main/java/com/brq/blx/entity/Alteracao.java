@@ -4,10 +4,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * The persistent class for the BLX_ALTERACAO database table.
- * 
- */
 @Entity
 @Table(name = "BLX_ALTERACAO")
 @NamedQuery(name = "Alteracao.findAll", query = "SELECT b FROM Alteracao b")
@@ -24,25 +20,22 @@ public class Alteracao implements Serializable {
 	private String dsDescricao;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "VL_ALTERACAO")
-	private Date vlAlteracao;
+	@Column(name = "DT_ALTERACAO")
+	private Date dtAlteracao;
+	
+	/* RELAÇÕES JOINCOLUMN */
 
-	// bi-directional many-to-one association to BlxAnuncio
 	@ManyToOne
 	@JoinColumn(name = "ANUNCIO_COD_ANUNCIO")
 	private Anuncio blxAnuncio;
-	
-/*	@Column(name = "ANUNCIO_COD_ANUNCIO")
-	private long pk_anuncio;*/
 
-	public Alteracao() {
-	}
+	public Alteracao() {}
 
-	public Alteracao(long codAlteracao, String dsDescricao, Date vlAlteracao) {
+	public Alteracao(long codAlteracao, String dsDescricao, Date dtAlteracao) {
 		super();
 		this.codAlteracao = codAlteracao;
 		this.dsDescricao = dsDescricao;
-		this.vlAlteracao = vlAlteracao;
+		this.dtAlteracao = dtAlteracao;
 	}
 
 	public long getCodAlteracao() {
@@ -61,16 +54,17 @@ public class Alteracao implements Serializable {
 		this.dsDescricao = dsDescricao;
 	}
 
-	public Date getVlAlteracao() {
-		return this.vlAlteracao;
+	public Date getDTAlteracao() {
+		return this.dtAlteracao;
 	}
 
 	public void setVlAlteracao(Date vlAlteracao) {
-		this.vlAlteracao = vlAlteracao;
+		this.dtAlteracao = vlAlteracao;
 	}
 
-
-
-
-
+	@Override
+	public String toString() {
+		return "Alteracao [codAlteracao=" + codAlteracao + ", dsDescricao=" + dsDescricao + ", blxAnuncio=" + blxAnuncio
+				+ "]";
+	}
 }

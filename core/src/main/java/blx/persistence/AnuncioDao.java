@@ -35,7 +35,6 @@ public class AnuncioDao extends PatternDAO<Anuncio> {
 		session.close();
 
 		return anuncio.get(0);
-
 	}
 
 	@Override
@@ -56,14 +55,11 @@ public class AnuncioDao extends PatternDAO<Anuncio> {
 
 	@Override
 	public List<Anuncio> buscarTodos() throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean atualizar(Anuncio object) throws Exception {
-		// TODO Auto-generated method stub
+	public boolean atualizar(Anuncio anuncio) throws Exception {
 		return false;
 	}
-
 }

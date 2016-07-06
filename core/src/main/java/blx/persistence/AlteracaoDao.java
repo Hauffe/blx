@@ -37,20 +37,17 @@ public class AlteracaoDao extends PatternDAO<Alteracao> {
 	}
 
 	@Override
-	public boolean cadastrar(Alteracao object)  throws Exception {
-		// TODO Auto-generated method stub
+	public boolean cadastrar(Alteracao alteracao)  throws Exception {
 		return false;
 	}
 
 	@Override
-	public boolean atualizar(Alteracao object) throws Exception {
-		// TODO Auto-generated method stub
+	public boolean atualizar(Alteracao alteracao) throws Exception {
 		return false;
 	}
 
 	@Override
 	public List<Alteracao> buscarTodos() throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

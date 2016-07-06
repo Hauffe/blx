@@ -4,10 +4,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-/**
- * The persistent class for the BLX_CONTATO database table.
- * 
- */
 @Entity
 @Table(name = "BLX_CONTATO")
 @NamedQuery(name = "Contato.findAll", query = "SELECT b FROM Contato b")
@@ -25,25 +21,22 @@ public class Contato implements Serializable {
 
 	@Column(name = "VL_TELEFONEMOVEL")
 	private String vlTelefonemovel;
+	
+	/* RELAÇÕES */
 
-	// bi-directional many-to-one association to BlxAnuncio
 	@OneToMany(mappedBy = "blxContato")
 	private List<Anuncio> blxAnuncios;
-
-	// bi-directional many-to-one association to BlxUsuario
-	 @ManyToOne
-	 @JoinColumn(name = "USUARIO_COD_USUARIO") private Usuario blxUsuario;
-	 
-
-	/*@Column(name = "USUARIO_COD_USUARIO")
-	private long pk_usuario;*/
-
-	// bi-directional many-to-one association to BlxEndereco
+	
 	@OneToMany(mappedBy = "blxContato")
 	private List<Endereco> blxEnderecos;
 
-	public Contato() {
-	}
+	/* RELAÇÕES JOINCOLUMN */
+	
+	@ManyToOne
+	@JoinColumn(name = "USUARIO_COD_USUARIO") 
+	private Usuario blxUsuario;
+
+	public Contato() {}
 
 	public Contato(long codContato, String vlTelefonefixo, String vlTelefonemovel) {
 		super();
@@ -51,11 +44,7 @@ public class Contato implements Serializable {
 		this.vlTelefonefixo = vlTelefonefixo;
 		this.vlTelefonemovel = vlTelefonemovel;
 	}
-
 	
-	
-
-
 	public Contato(long codContato, String vlTelefonefixo, String vlTelefonemovel, Usuario blxUsuario) {
 		super();
 		this.codContato = codContato;
@@ -115,4 +104,9 @@ public class Contato implements Serializable {
 		this.blxEnderecos = blxEnderecos;
 	}
 
+	@Override
+	public String toString() {
+		return "Contato [codContato=" + codContato + ", vlTelefonefixo=" + vlTelefonefixo + ", vlTelefonemovel="
+				+ vlTelefonemovel + ", blxUsuario=" + blxUsuario + "]";
+	}
 }

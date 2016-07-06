@@ -38,22 +38,17 @@ public class ImagemDao extends PatternDAO<Imagem> {
 	}
 
 	@Override
-	public boolean cadastrar(Imagem object) throws Exception {
-		// TODO Auto-generated method stub
+	public boolean cadastrar(Imagem imagem) throws Exception {
 		return false;
 	}
 
 	@Override
-	public boolean atualizar(Imagem object) throws Exception {
-		// TODO Auto-generated method stub
+	public boolean atualizar(Imagem imagem) throws Exception {
 		return false;
 	}
 
 	@Override
 	public List<Imagem> buscarTodos() throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
-
-
 }

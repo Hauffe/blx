@@ -4,10 +4,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * The persistent class for the BLX_AVALIACAO database table.
- * 
- */
 @Entity
 @Table(name = "BLX_AVALIACAO")
 @NamedQuery(name = "Avaliacao.findAll", query = "SELECT b FROM Avaliacao b")
@@ -26,20 +22,14 @@ public class Avaliacao implements Serializable {
 
 	@Column(name = "VL_NOTA")
 	private String vlNota;
-
-	// bi-directional many-to-one association to BlxAnuncio
-	 @ManyToOne
-	 @JoinColumn(name="ANUNCIO_COD_ANUNCIO")
-	 private Anuncio blxAnuncio;
-	 
-
-	/*@Column(name = "ANUNCIO_COD_ANUNCIO")
-	private long pk_anuncio;*/
-
-	public Avaliacao() {
-	}
-
 	
+	/* Relações JOINCOLUMN */
+
+	@ManyToOne
+	@JoinColumn(name="ANUNCIO_COD_ANUNCIO")
+	private Anuncio blxAnuncio;
+
+	public Avaliacao() {}
 
 	public Avaliacao(long codAvaliacao, Date dtAvaliacao, String vlNota, Anuncio blxAnuncio) {
 		super();
@@ -48,8 +38,6 @@ public class Avaliacao implements Serializable {
 		this.vlNota = vlNota;
 		this.blxAnuncio = blxAnuncio;
 	}
-
-
 
 	public long getCodAvaliacao() {
 		return this.codAvaliacao;
@@ -75,4 +63,9 @@ public class Avaliacao implements Serializable {
 		this.vlNota = vlNota;
 	}
 
+	@Override
+	public String toString() {
+		return "Avaliacao [codAvaliacao=" + codAvaliacao + ", dtAvaliacao=" + dtAvaliacao + ", vlNota=" + vlNota
+				+ ", blxAnuncio=" + blxAnuncio + "]";
+	}
 }

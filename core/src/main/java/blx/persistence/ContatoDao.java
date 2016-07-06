@@ -36,22 +36,17 @@ public class ContatoDao extends PatternDAO<Contato> {
 	}
 
 	@Override
-	public boolean cadastrar(Contato object) throws Exception {
-		// TODO Auto-generated method stub
+	public boolean cadastrar(Contato contato) throws Exception {
 		return false;
 	}
 
 	@Override
-	public boolean atualizar(Contato object) throws Exception {
-		// TODO Auto-generated method stub
+	public boolean atualizar(Contato contato) throws Exception {
 		return false;
 	}
 
 	@Override
 	public List<Contato> buscarTodos() throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
-
-
 }

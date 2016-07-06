@@ -3,11 +3,6 @@ package com.brq.blx.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
-/**
- * The persistent class for the BLX_IMAGEM database table.
- * 
- */
 @Entity
 @Table(name="BLX_IMAGEM")
 @NamedQuery(name="Imagem.findAll", query="SELECT b FROM Imagem b")
@@ -25,17 +20,19 @@ public class Imagem implements Serializable {
 
 	@Column(name="VL_CAMINHO")
 	private String vlCaminho;
+	
+	/* RELAÇÕES JOINCOLUMN */
 
-	//bi-directional many-to-one association to BlxAnuncio
 	@ManyToOne
 	@JoinColumn(name="ANUNCIO_COD_ANUNCIO")
 	private Anuncio blxAnuncio;
-	
-	
-	/*@Column(name="ANUNCIO_COD_ANUNCIO")
-	private long pk_anuncio;*/
 
-	public Imagem() {
+	public Imagem() {}
+
+	public Imagem(long codImagem, Anuncio blxAnuncio) {
+		super();
+		this.codImagem = codImagem;
+		this.blxAnuncio = blxAnuncio;
 	}
 
 	public long getCodImagem() {
@@ -69,7 +66,10 @@ public class Imagem implements Serializable {
 	public void setBlxAnuncio(Anuncio blxAnuncio) {
 		this.blxAnuncio = blxAnuncio;
 	}
-	
-	
 
+	@Override
+	public String toString() {
+		return "Imagem [codImagem=" + codImagem + ", nmNome=" + nmNome + ", vlCaminho=" + vlCaminho + ", blxAnuncio="
+				+ blxAnuncio + "]";
+	}
 }

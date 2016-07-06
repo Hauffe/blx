@@ -4,19 +4,12 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-/**
- * The persistent class for the BLX_CATEGORIA database table.
- * 
- */
 @Entity
 @Table(name = "BLX_CATEGORIA")
 @NamedQuery(name = "Categoria.findAll", query = "SELECT b FROM Categoria b")
 public class Categoria implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@SequenceGenerator(name = "BLX_CATEGORIA_CODCATEGORIA_GENERATOR", sequenceName = "SEQ_ID_CATEGORIA", allocationSize = 1)
@@ -29,44 +22,37 @@ public class Categoria implements Serializable {
 
 	@Column(name = "NM_NOME")
 	private String nmNome;
+	
+	/* RELAÇÕES */
 
-	// bi-directional many-to-one association to BlxAnuncio
 	@OneToMany(mappedBy = "blxCategoria")
 	private List<Anuncio> blxAnuncios;
 
-	// bi-directional many-to-one association to Categoria
+	/* RELAÇÕES JOINCOLUMN */
+	
+	@ManyToOne(targetEntity=Categoria.class)
+	@JoinColumn(name = "CATEGORIA_COD_CATEGORIA") 
+	private Categoria blxCategoriaPai;
 
-	 @ManyToOne 
-	 @JoinColumn(name = "CATEGORIA_COD_CATEGORIA") 
-	 private Categoria blxCategoria;
-	 
+	public Categoria() {}
 
-	/*@Column(name = "CATEGORIA_COD_CATEGORIA")
-	private Long pk_categoria;*/
-
-	/*
-	 * //bi-directional many-to-one association to Categoria
-	 * 
-	 * @OneToMany(mappedBy="blxCategoria") private List<Categoria>
-	 * blxCategorias;
-	 */
-
-	public Categoria() {
+	public Categoria(Long codCategoria, String dsDescricao, String nmNome, Categoria blxCategoriaPai) {
+		super();
+		this.codCategoria = codCategoria;
+		this.dsDescricao = dsDescricao;
+		this.nmNome = nmNome;
+		this.blxCategoriaPai = blxCategoriaPai;
 	}
 
-
-
 	public Categoria(Long codCategoria, String dsDescricao, String nmNome, List<Anuncio> blxAnuncios,
-			Categoria blxCategoria) {
+			Categoria blxCategoriaPai) {
 		super();
 		this.codCategoria = codCategoria;
 		this.dsDescricao = dsDescricao;
 		this.nmNome = nmNome;
 		this.blxAnuncios = blxAnuncios;
-		this.blxCategoria = blxCategoria;
+		this.blxCategoriaPai = blxCategoriaPai;
 	}
-
-
 
 	public Long getCodCategoria() {
 		return this.codCategoria;
@@ -100,6 +86,9 @@ public class Categoria implements Serializable {
 		this.blxAnuncios = blxAnuncios;
 	}
 
-
-
+	@Override
+	public String toString() {
+		return "Categoria [codCategoria=" + codCategoria + ", dsDescricao=" + dsDescricao + ", nmNome=" + nmNome
+				+ ", blxCategoriaPai=" + blxCategoriaPai + "]";
+	}
 }

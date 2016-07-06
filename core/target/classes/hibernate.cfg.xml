@@ -24,7 +24,7 @@
 		<mapping class="com.brq.blx.entity.Contato"/>
 		<mapping class="com.brq.blx.entity.Endereco"/>
 		<mapping class="com.brq.blx.entity.Imagem"/> 
-		<mapping class="com.brq.blx.entity.Tipousuario"/>
+		<mapping class="com.brq.blx.entity.TipoUsuario"/>
 		<mapping class="com.brq.blx.entity.Usuario"/>
 
 	</session-factory>

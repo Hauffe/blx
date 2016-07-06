@@ -37,22 +37,17 @@ public class AvaliacaoDao extends PatternDAO<Avaliacao> {
 	}
 
 	@Override
-	public boolean cadastrar(Avaliacao object) throws Exception{
-		// TODO Auto-generated method stub
+	public boolean cadastrar(Avaliacao avaliacao) throws Exception{
 		return false;
 	}
 
 	@Override
-	public boolean atualizar(Avaliacao object)throws Exception {
-		// TODO Auto-generated method stub
+	public boolean atualizar(Avaliacao avaliacao)throws Exception {
 		return false;
 	}
 
 	@Override
 	public List<Avaliacao> buscarTodos() throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
-
-
 }

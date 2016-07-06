@@ -14,48 +14,41 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-
-
-/**
- * The persistent class for the BLX_TIPOUSUARIO database table.
- * 
- */
 @Entity
 @Table(name="BLX_TIPOUSUARIO")
-@NamedQuery(name="Tipousuario.findAll", query="SELECT b FROM Tipousuario b")
-public class Tipousuario implements Serializable {
+@NamedQuery(name="TipoUsuario.findAll", query="SELECT b FROM TipoUsuario b")
+public class TipoUsuario implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@SequenceGenerator(name="BLX_TIPOUSUARIO_CODTIPOUSUARIO_GENERATOR", sequenceName="SEQ_ID_TIPOUSUARIO", allocationSize = 1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BLX_TIPOUSUARIO_CODTIPOUSUARIO_GENERATOR")
 	@Column(name="COD_TIPOUSUARIO")
-	private long codTipousuario;
+	private long codTipoUsuario;
 
 	@Column(name="VL_TIPO")
 	private String vlTipo;
 
-	//bi-directional many-to-one association to BlxUsuario
+	/* RELAÇÕES */
+	
 	@OneToMany(mappedBy="blxTipousuario", fetch=FetchType.EAGER)
 	private List<Usuario> blxUsuarios;
 	
+	public TipoUsuario() {}
 
-	public Tipousuario() {
-	}
-
-	public Tipousuario(long codTipousuario, String vlTipo) {
+	public TipoUsuario(long codTipoUsuario, String vlTipo) {
 		super();
-		this.codTipousuario = codTipousuario;
+		this.codTipoUsuario = codTipoUsuario;
 		this.vlTipo = vlTipo;
 	}
 
-	
-	public long getCodTipousuario() {
-		return this.codTipousuario;
+	public long getCodTipoUsuario() {
+		return this.codTipoUsuario;
 	}
 
-	public void setCodTipousuario(long codTipousuario) {
-		this.codTipousuario = codTipousuario;
+	public void setCodTipoUsuario(long codTipousuario) {
+		this.codTipoUsuario = codTipousuario;
 	}
 
 	public String getVlTipo() {
@@ -68,9 +61,6 @@ public class Tipousuario implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Tipousuario [codTipousuario=" + codTipousuario + ", vlTipo=" + vlTipo + "]";
+		return "TipoUsuario [codTipoUsuario=" + codTipoUsuario + ", vlTipo=" + vlTipo + "]";
 	}
-	
-	
-
 }

@@ -5,10 +5,6 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * The persistent class for the BLX_USUARIO database table.
- * 
- */
 @Entity
 @Table(name = "BLX_USUARIO")
 @NamedQuery(name = "Usuario.findAll", query = "SELECT b FROM Usuario b")
@@ -32,7 +28,6 @@ public class Usuario implements Serializable {
 	@Id
 	@SequenceGenerator(name = "BLX_USUARIO_CODUSUARIO_GENERATOR", sequenceName = "BLXSEQ_ID_USUARIO", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BLX_USUARIO_CODUSUARIO_GENERATOR")
-	/* @GeneratedValue(generator="BLX_USUARIO_CODUSUARIO_GENERATOR") */
 	@Column(name = "COD_USUARIO")
 	private long codUsuario;
 
@@ -53,30 +48,40 @@ public class Usuario implements Serializable {
 
 	@Column(name = "VL_STATUS")
 	private BigDecimal vlStatus;
+	
+	/* RELAÇÕES */
 
-	// bi-directional many-to-one association to BlxAnuncio
 	@OneToMany(mappedBy = "blxUsuario")
 	private List<Anuncio> blxAnuncios;
 
-	// bi-directional many-to-one association to BlxContato
 	@OneToMany(mappedBy = "blxUsuario")
 	private List<Contato> blxContatos;
 
-	// bi-directional many-to-one association to BlxTipousuario
+	/* RELAÇÕES JOINCOLUMN */
+	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "TIPOUSUARIO_COD_TIPOUSUARIO")
-	private Tipousuario blxTipousuario;
+	private TipoUsuario blxTipousuario;
 
-	/*
-	 * @Column(name = "TIPOUSUARIO_COD_TIPOUSUARIO") private long
-	 * pk_tipousuario;
-	 */
-
-	public Usuario() {
-	}
+	public Usuario() {}
 
 	public Usuario(long codUsuario, String nmNome, String vlEmail, String vlLogin, String vlRg, String vlSenha,
-			BigDecimal vlStatus, List<Anuncio> blxAnuncios, List<Contato> blxContatos, Tipousuario blxTipousuario) {
+			BigDecimal vlStatus, TipoUsuario blxTipousuario) {
+		super();
+		this.codUsuario = codUsuario;
+		this.nmNome = nmNome;
+		this.vlEmail = vlEmail;
+		this.vlLogin = vlLogin;
+		this.vlRg = vlRg;
+		this.vlSenha = vlSenha;
+		this.vlStatus = vlStatus;
+		this.blxTipousuario = blxTipousuario;
+	}
+
+
+
+	public Usuario(long codUsuario, String nmNome, String vlEmail, String vlLogin, String vlRg, String vlSenha,
+			BigDecimal vlStatus, List<Anuncio> blxAnuncios, List<Contato> blxContatos, TipoUsuario blxTipousuario) {
 		super();
 		this.codUsuario = codUsuario;
 		this.nmNome = nmNome;
@@ -162,24 +167,18 @@ public class Usuario implements Serializable {
 		this.blxContatos = blxContatos;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
-
-	public Tipousuario getBlxTipousuario() {
+	public TipoUsuario getBlxTipousuario() {
 		return blxTipousuario;
 	}
 
-	public void setBlxTipousuario(Tipousuario blxTipousuario) {
+	public void setBlxTipousuario(TipoUsuario blxTipousuario) {
 		this.blxTipousuario = blxTipousuario;
 	}
 
 	@Override
 	public String toString() {
 		return "Usuario [codUsuario=" + codUsuario + ", nmNome=" + nmNome + ", vlEmail=" + vlEmail + ", vlLogin="
-				+ vlLogin + ", vlRg=" + vlRg + ", vlSenha=" + vlSenha + ", vlStatus=" + vlStatus + ", pk_tipousuario="
-				+ "]";
+				+ vlLogin + ", vlRg=" + vlRg + ", vlSenha=" + vlSenha + ", vlStatus=" + vlStatus + ", blxTipousuario="
+				+ blxTipousuario + "]";
 	}
-
 }
