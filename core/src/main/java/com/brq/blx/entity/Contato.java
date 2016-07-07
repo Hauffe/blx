@@ -21,14 +21,6 @@ public class Contato implements Serializable {
 
 	@Column(name = "VL_TELEFONEMOVEL")
 	private String vlTelefoneMovel;
-	
-	/* RELAÇÕES */
-
-	@OneToMany(mappedBy = "blxContato")
-	private List<Anuncio> blxAnuncios;
-	
-	@OneToMany(mappedBy = "blxContato")
-	private List<Endereco> blxEnderecos;
 
 	/* RELAÇÕES JOINCOLUMN */
 	
@@ -59,9 +51,8 @@ public class Contato implements Serializable {
 		this.codContato = codContato;
 		this.vlTelefoneFixo = vlTelefoneFixo;
 		this.vlTelefoneMovel = vlTelefoneMovel;
-		this.blxAnuncios = blxAnuncios;
 		this.blxUsuario = blxUsuario;
-		this.blxEnderecos = blxEnderecos;
+		
 	}
 
 	public long getCodContato() {
@@ -86,22 +77,6 @@ public class Contato implements Serializable {
 
 	public void setVlTelefoneMovel(String vlTelefonemovel) {
 		this.vlTelefoneMovel = vlTelefonemovel;
-	}
-
-	public List<Anuncio> getBlxAnuncios() {
-		return this.blxAnuncios;
-	}
-
-	public void setBlxAnuncios(List<Anuncio> blxAnuncios) {
-		this.blxAnuncios = blxAnuncios;
-	}
-
-	public List<Endereco> getBlxEnderecos() {
-		return this.blxEnderecos;
-	}
-
-	public void setBlxEnderecos(List<Endereco> blxEnderecos) {
-		this.blxEnderecos = blxEnderecos;
 	}
 
 	@Override

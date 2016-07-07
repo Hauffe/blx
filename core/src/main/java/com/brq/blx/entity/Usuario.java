@@ -47,14 +47,6 @@ public class Usuario implements Serializable {
 
 	@Column(name = "VL_STATUS")
 	private Integer vlStatus;
-	
-	/* RELAÇÕES */
-
-	@OneToMany(mappedBy = "blxUsuario")
-	private List<Anuncio> blxAnuncios;
-	
-	@OneToMany(mappedBy = "blxUsuario")
-	private List<Contato> blxContatos;
 
 	/* RELAÇÕES JOINCOLUMN */
 	
@@ -87,8 +79,6 @@ public class Usuario implements Serializable {
 		this.vlRg = vlRg;
 		this.vlSenha = vlSenha;
 		this.vlStatus = vlStatus;
-		this.blxAnuncios = blxAnuncios;
-		this.blxContatos = blxContatos;
 		this.blxTipousuario = blxTipousuario;
 	}
 
@@ -146,22 +136,6 @@ public class Usuario implements Serializable {
 
 	public void setVlStatus(Integer vlStatus) {
 		this.vlStatus = vlStatus;
-	}
-
-	public List<Anuncio> getBlxAnuncios() {
-		return this.blxAnuncios;
-	}
-
-	public void setBlxAnuncios(List<Anuncio> blxAnuncios) {
-		this.blxAnuncios = blxAnuncios;
-	}
-
-	public List<Contato> getBlxContatos() {
-		return this.blxContatos;
-	}
-
-	public void setBlxContatos(List<Contato> blxContatos) {
-		this.blxContatos = blxContatos;
 	}
 
 	public TipoUsuario getBlxTipousuario() {

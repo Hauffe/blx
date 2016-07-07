@@ -22,11 +22,6 @@ public class Categoria implements Serializable {
 
 	@Column(name = "NM_NOME")
 	private String nmNome;
-	
-	/* RELAÇÕES */
-
-	@OneToMany(mappedBy = "blxCategoria")
-	private List<Anuncio> blxAnuncios;
 
 	/* RELAÇÕES JOINCOLUMN */
 	
@@ -50,7 +45,6 @@ public class Categoria implements Serializable {
 		this.codCategoria = codCategoria;
 		this.dsDescricao = dsDescricao;
 		this.nmNome = nmNome;
-		this.blxAnuncios = blxAnuncios;
 		this.blxCategoriaPai = blxCategoriaPai;
 	}
 
@@ -78,13 +72,7 @@ public class Categoria implements Serializable {
 		this.nmNome = nmNome;
 	}
 
-	public List<Anuncio> getBlxAnuncios() {
-		return this.blxAnuncios;
-	}
 
-	public void setBlxAnuncios(List<Anuncio> blxAnuncios) {
-		this.blxAnuncios = blxAnuncios;
-	}
 
 	@Override
 	public String toString() {

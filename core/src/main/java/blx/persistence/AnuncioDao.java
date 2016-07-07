@@ -1,15 +1,11 @@
 package blx.persistence;
 
 import java.util.List;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import com.brq.blx.entity.Alteracao;
 import com.brq.blx.entity.Anuncio;
-import com.brq.blx.entity.Avaliacao;
-import com.brq.blx.entity.Imagem;
+
 
 public class AnuncioDao extends PatternDAO<Anuncio> {
 

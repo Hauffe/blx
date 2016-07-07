@@ -80,7 +80,7 @@ public class UsuarioRest {
 			Gson gson = b.create();
 			
 			Anuncio anuncio = AnuncioDao.getInstance().buscarPorId(15);
-			obj.addProperty("result",  gson.toJson(anuncio.toString()));
+			obj.addProperty("result",  gson.toJson(anuncio));
 
 			
 		} catch(Exception e){
