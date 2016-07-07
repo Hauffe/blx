@@ -50,10 +50,10 @@ public class Usuario implements Serializable {
 	
 	/* RELAÇÕES */
 
-	@OneToMany(mappedBy = "blxUsuario", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "blxUsuario")
 	private List<Anuncio> blxAnuncios;
 	
-	@OneToMany(mappedBy = "blxUsuario", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "blxUsuario")
 	private List<Contato> blxContatos;
 
 	/* RELAÇÕES JOINCOLUMN */

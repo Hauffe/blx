@@ -56,15 +56,15 @@ public class Anuncio implements Serializable {
 	/* RELAÇÔES */
 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "blxAnuncio", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "blxAnuncio")
 	private List<Avaliacao> blxAvaliacoes;
 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "blxAnuncio", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "blxAnuncio")
 	private List<Imagem> blxImagems;
 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "blxAnuncio", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "blxAnuncio")
 	private List<Alteracao> blxAlteracoes;
 	
 	/* RELAÇÕES JOINCOLUMN */
@@ -84,13 +84,12 @@ public class Anuncio implements Serializable {
 	public Anuncio() {
 		blxAlteracoes = new ArrayList<Alteracao>();
 		blxImagems = new ArrayList<Imagem>();
-		//blxAvaliacoes = new ArrayList<Avaliacao>();
-		
+		blxAvaliacoes = new ArrayList<Avaliacao>();
 	}
 
 	public Anuncio(long codAnuncio, String dsDescricao, Date dtAnuncio, String nmNome, double vlPreco,
 			Integer vlStatus, Categoria blxCategoria, Contato blxContato, Usuario blxUsuario) {
-		super();
+		this();
 		this.codAnuncio = codAnuncio;
 		this.dsDescricao = dsDescricao;
 		this.dtAnuncio = dtAnuncio;
@@ -106,24 +105,12 @@ public class Anuncio implements Serializable {
 		return codAnuncio;
 	}
 
-	public void setCodAnuncio(long codAnuncio) {
-		this.codAnuncio = codAnuncio;
-	}
-
 	public String getDsDescricao() {
 		return dsDescricao;
 	}
 
 	public void setDsDescricao(String dsDescricao) {
 		this.dsDescricao = dsDescricao;
-	}
-
-	public Date getDtAnuncio() {
-		return dtAnuncio;
-	}
-
-	public void setDtAnuncio(Date dtAnuncio) {
-		this.dtAnuncio = dtAnuncio;
 	}
 
 	public String getNmNome() {
@@ -150,34 +137,7 @@ public class Anuncio implements Serializable {
 		this.vlStatus = vlStatus;
 	}
 
-/*	public List<Avaliacao> getBlxAvaliacoes() {
-		return blxAvaliacoes;
-	}
 
-	public void setBlxAvaliacoes(List<Avaliacao> blxAvaliacoes) {
-		this.blxAvaliacoes = blxAvaliacoes;
-	}*/
-
-	public List<Alteracao> getBlxAlteracoes() {
-		return blxAlteracoes;
-	}
-
-	public void setBlxAlteracoes(List<Alteracao> blxAlteracoes) {
-		this.blxAlteracoes = blxAlteracoes;
-	}
-
-	@OneToMany(mappedBy = "blxAnuncio")
-	public List<Imagem> getBlxImagems() {
-		return blxImagems;
-	}
-
-	public void setBlxImagems(List<Imagem> blxImagems) {
-		this.blxImagems = blxImagems;
-	}
-
-	public Categoria getBlxCategoria() {
-		return blxCategoria;
-	}
 
 	public void setBlxCategoria(Categoria blxCategoria) {
 		this.blxCategoria = blxCategoria;
@@ -199,10 +159,14 @@ public class Anuncio implements Serializable {
 		this.blxUsuario = blxUsuario;
 	}
 
+	public void setCodAnuncio(long codAnuncio) {
+		this.codAnuncio = codAnuncio;
+	}
+
 	@Override
 	public String toString() {
 		return "Anuncio [codAnuncio=" + codAnuncio + ", dsDescricao=" + dsDescricao + ", dtAnuncio=" + dtAnuncio
-				+ ", nmNome=" + nmNome + ", vlPreco=" + vlPreco + ", vlStatus=" + vlStatus + ", blxAlteracaos="
-				+ blxAlteracoes + "]";
+				+ ", nmNome=" + nmNome + ", vlPreco=" + vlPreco + ", vlStatus=" + vlStatus + ", blxCategoria="
+				+ blxCategoria + ", blxContato=" + blxContato + ", blxUsuario=" + blxUsuario + "]";
 	}
 }

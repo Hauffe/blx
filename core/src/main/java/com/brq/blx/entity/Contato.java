@@ -24,10 +24,10 @@ public class Contato implements Serializable {
 	
 	/* RELAÇÕES */
 
-	@OneToMany(mappedBy = "blxContato", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "blxContato")
 	private List<Anuncio> blxAnuncios;
 	
-	@OneToMany(mappedBy = "blxContato", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "blxContato")
 	private List<Endereco> blxEnderecos;
 
 	/* RELAÇÕES JOINCOLUMN */

@@ -5,7 +5,11 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import com.brq.blx.entity.Alteracao;
 import com.brq.blx.entity.Anuncio;
+import com.brq.blx.entity.Avaliacao;
+import com.brq.blx.entity.Imagem;
 
 public class AnuncioDao extends PatternDAO<Anuncio> {
 
@@ -22,18 +26,20 @@ public class AnuncioDao extends PatternDAO<Anuncio> {
 	@Override
 	public Anuncio buscarPorId(Integer id) throws Exception {
 		session = HibernateUtil.getSessionFactory().openSession();
+	
 		query = session.createQuery("FROM Anuncio WHERE codAnuncio = ?");
-
 		query.setInteger(0, id);
 
 		@SuppressWarnings("unchecked")
 		List<Anuncio> anuncio = query.list();
 
-		System.out.println("ANUNCIO FOUND: " + anuncio.get(0));
+		Anuncio anuncioFound = anuncio.get(0);
+		
+		System.out.println("ANUNCIO FOUND: " + anuncioFound);
 
 		session.close();
 
-		return anuncio.get(0);
+		return anuncioFound;
 	}
 
 	@Override
@@ -48,8 +54,8 @@ public class AnuncioDao extends PatternDAO<Anuncio> {
 		session.flush();
 		transaction.commit();
 		session.close();
+		
 		return true;
-
 	}
 
 	@Override

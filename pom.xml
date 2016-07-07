@@ -29,8 +29,14 @@
 	    <version>2.7</version>
 	</dependency>
     
+    <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+	<dependency>
+ 	   <groupId>com.google.guava</groupId>
+ 	   <artifactId>guava</artifactId>
+  	  <version>r05</version>
+	</dependency>
     
-	    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+	<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 	<dependency>
 	    <groupId>com.fasterxml.jackson.core</groupId>
 	    <artifactId>jackson-databind</artifactId>
