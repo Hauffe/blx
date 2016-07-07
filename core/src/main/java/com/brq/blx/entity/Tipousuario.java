@@ -32,7 +32,7 @@ public class TipoUsuario implements Serializable {
 
 	/* RELAÇÕES */
 	
-	@OneToMany(mappedBy="blxTipousuario", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="blxTipousuario", fetch = FetchType.EAGER)
 	private List<Usuario> blxUsuarios;
 	
 	public TipoUsuario() {}

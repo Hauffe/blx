@@ -5,8 +5,8 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import com.brq.blx.entity.TipoUsuario;
+
 
 public class TipoUsuarioDao extends PatternDAO<TipoUsuario> {
 	
@@ -29,9 +29,7 @@ public class TipoUsuarioDao extends PatternDAO<TipoUsuario> {
 		
 		@SuppressWarnings("unchecked")
 		List<TipoUsuario> user = query.list();
-		
-		System.out.println("TipoUsuario FOUND: " + user.get(0));
-		
+			
 		session.close();
 		
 		return user.get(0);
@@ -39,16 +37,60 @@ public class TipoUsuarioDao extends PatternDAO<TipoUsuario> {
 	
 	@Override
 	public boolean cadastrar(TipoUsuario tipoUsuario) throws Exception {
-		return false;
+		session = HibernateUtil.getSessionFactory().openSession();
+
+		transaction = session.beginTransaction();
+
+		session.save(tipoUsuario);
+	
+		transaction.commit();
+		
+		session.close();
+		return  true;
 	}
 
 	@Override
 	public boolean atualizar(TipoUsuario tipoUsuario) throws Exception {
-		return false;
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		
+		session.update(tipoUsuario);
+		transaction.commit();
+		session.close();
+		
+		return true;	
+		
 	}
 
 	@Override
 	public List<TipoUsuario> buscarTodos() throws Exception {
-		return null;
+		session = HibernateUtil.getSessionFactory().openSession();
+		query = session.createQuery("FROM TipoUsuario");
+		
+		@SuppressWarnings("unchecked")
+		List<TipoUsuario> listaTipoUsuario = query.list();
+		
+		session.close();
+		return listaTipoUsuario;
+	}
+
+	@Override
+	public List<TipoUsuario> buscarComFiltro(String nome) throws Exception {
+		session = HibernateUtil.getSessionFactory().openSession();
+		query = session.createQuery("FROM TipoUsuario WHERE vlTipo = ?");
+		
+		query.setString(0, nome);
+		
+		@SuppressWarnings("unchecked")
+		List<TipoUsuario> listaTipoUsuario = query.list();
+		
+		session.close();
+		return listaTipoUsuario;
+	}
+
+	@Override
+	public boolean atualizarStatus(TipoUsuario object, Integer status) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

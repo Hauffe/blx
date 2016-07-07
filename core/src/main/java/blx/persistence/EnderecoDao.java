@@ -38,16 +38,59 @@ public class EnderecoDao extends PatternDAO<Endereco> {
 
 	@Override
 	public boolean cadastrar(Endereco endereco) throws Exception {
-		return false;
+		session = HibernateUtil.getSessionFactory().openSession();
+
+		transaction = session.beginTransaction();
+
+		session.save(endereco);
+	
+		transaction.commit();
+		
+		session.close();
+		return  true;
 	}
 
 	@Override
 	public boolean atualizar(Endereco endereco) throws Exception {
-		return false;
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		
+		session.update(endereco);
+		transaction.commit();
+		session.close();
+		
+		return true;
 	}
 
 	@Override
 	public List<Endereco> buscarTodos() throws Exception {
-		return null;
+		session = HibernateUtil.getSessionFactory().openSession();
+		query = session.createQuery("FROM Endereco");
+		
+		@SuppressWarnings("unchecked")
+		List<Endereco> listaEndereco = query.list();
+		
+		session.close();
+		return listaEndereco;
+	}
+
+	@Override
+	public List<Endereco> buscarComFiltro(String cidade) throws Exception {
+		session = HibernateUtil.getSessionFactory().openSession();
+		query = session.createQuery("FROM Endereco WHERE vlCidade = ?");
+		
+		query.setString(0, cidade);
+		
+		@SuppressWarnings("unchecked")
+		List<Endereco> listaEndereco = query.list();
+		
+		session.close();
+		return listaEndereco;
+	}
+
+	@Override
+	public boolean atualizarStatus(Endereco object, Integer status) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

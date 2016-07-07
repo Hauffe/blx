@@ -55,7 +55,6 @@ public class UsuarioDao extends PatternDAO<Usuario> {
 		
 		return true;				
 	}
-
 	
 	 /* 
 	 * TRAVA AÍ, TRAVA AÍ! 
@@ -102,9 +101,36 @@ public class UsuarioDao extends PatternDAO<Usuario> {
 		query = session.createQuery("FROM Usuario");
 		
 		@SuppressWarnings("unchecked")
-		List<Usuario> user = query.list();
+		List<Usuario> listaUsuario = query.list();
 		
 		session.close();
-		return user;
+		return listaUsuario;
+	}
+
+	@Override
+	public List<Usuario> buscarComFiltro(String nome) throws Exception {
+		session = HibernateUtil.getSessionFactory().openSession();
+		query = session.createQuery("FROM Usuario WHERE nmNome = nome");
+		
+		@SuppressWarnings("unchecked")
+		List<Usuario> listaUsuarios = query.list();
+		
+		session.close();
+		return listaUsuarios;
+		
+	}
+
+	@Override
+	public boolean atualizarStatus(Usuario usuario, Integer status) throws Exception {
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		usuario.setVlStatus(status);
+		
+		session.update(usuario);
+	
+		transaction.commit();
+		session.close();
+		
+		return true;	
 	}
 }

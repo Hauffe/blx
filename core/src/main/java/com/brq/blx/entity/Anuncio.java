@@ -1,10 +1,28 @@
 package com.brq.blx.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
 @Table(name = "BLX_ANUNCIO")
@@ -33,18 +51,21 @@ public class Anuncio implements Serializable {
 	private double vlPreco;
 
 	@Column(name = "VL_STATUS")
-	private BigDecimal vlStatus;
+	private Integer vlStatus;
 	
 	/* RELAÇÔES */
 
-	@OneToMany(mappedBy = "blxAnuncio")
-	private List<Avaliacao> blxAvaliacaos;
+	@JsonManagedReference
+	@OneToMany(mappedBy = "blxAnuncio", fetch = FetchType.EAGER)
+	private List<Avaliacao> blxAvaliacoes;
 
-	@OneToMany(mappedBy = "blxAnuncio")
+	@JsonManagedReference
+	@OneToMany(mappedBy = "blxAnuncio", fetch = FetchType.EAGER)
 	private List<Imagem> blxImagems;
 
-	@OneToMany(mappedBy = "blxAnuncio")
-	private List<Alteracao> blxAlteracaos;
+	@JsonManagedReference
+	@OneToMany(mappedBy = "blxAnuncio", fetch = FetchType.EAGER)
+	private List<Alteracao> blxAlteracoes;
 	
 	/* RELAÇÕES JOINCOLUMN */
 	
@@ -60,10 +81,15 @@ public class Anuncio implements Serializable {
 	@JoinColumn(name = "USUARIO_COD_USUARIO")
 	private Usuario blxUsuario;
 
-	public Anuncio() {}
+	public Anuncio() {
+		blxAlteracoes = new ArrayList<Alteracao>();
+		blxImagems = new ArrayList<Imagem>();
+		//blxAvaliacoes = new ArrayList<Avaliacao>();
+		
+	}
 
 	public Anuncio(long codAnuncio, String dsDescricao, Date dtAnuncio, String nmNome, double vlPreco,
-			BigDecimal vlStatus, Categoria blxCategoria, Contato blxContato, Usuario blxUsuario) {
+			Integer vlStatus, Categoria blxCategoria, Contato blxContato, Usuario blxUsuario) {
 		super();
 		this.codAnuncio = codAnuncio;
 		this.dsDescricao = dsDescricao;
@@ -116,30 +142,31 @@ public class Anuncio implements Serializable {
 		this.vlPreco = vlPreco;
 	}
 
-	public BigDecimal getVlStatus() {
+	public Integer getVlStatus() {
 		return vlStatus;
 	}
 
-	public void setVlStatus(BigDecimal vlStatus) {
+	public void setVlStatus(Integer vlStatus) {
 		this.vlStatus = vlStatus;
 	}
 
-	public List<Alteracao> getBlxAlteracaos() {
-		return blxAlteracaos;
+/*	public List<Avaliacao> getBlxAvaliacoes() {
+		return blxAvaliacoes;
 	}
 
-	public void setBlxAlteracaos(List<Alteracao> blxAlteracaos) {
-		this.blxAlteracaos = blxAlteracaos;
+	public void setBlxAvaliacoes(List<Avaliacao> blxAvaliacoes) {
+		this.blxAvaliacoes = blxAvaliacoes;
+	}*/
+
+	public List<Alteracao> getBlxAlteracoes() {
+		return blxAlteracoes;
 	}
 
-	public List<Avaliacao> getBlxAvaliacaos() {
-		return blxAvaliacaos;
+	public void setBlxAlteracoes(List<Alteracao> blxAlteracoes) {
+		this.blxAlteracoes = blxAlteracoes;
 	}
 
-	public void setBlxAvaliacaos(List<Avaliacao> blxAvaliacaos) {
-		this.blxAvaliacaos = blxAvaliacaos;
-	}
-
+	@OneToMany(mappedBy = "blxAnuncio")
 	public List<Imagem> getBlxImagems() {
 		return blxImagems;
 	}
@@ -148,10 +175,34 @@ public class Anuncio implements Serializable {
 		this.blxImagems = blxImagems;
 	}
 
+	public Categoria getBlxCategoria() {
+		return blxCategoria;
+	}
+
+	public void setBlxCategoria(Categoria blxCategoria) {
+		this.blxCategoria = blxCategoria;
+	}
+
+	public Contato getBlxContato() {
+		return blxContato;
+	}
+
+	public void setBlxContato(Contato blxContato) {
+		this.blxContato = blxContato;
+	}
+
+	public Usuario getBlxUsuario() {
+		return blxUsuario;
+	}
+
+	public void setBlxUsuario(Usuario blxUsuario) {
+		this.blxUsuario = blxUsuario;
+	}
+
 	@Override
 	public String toString() {
 		return "Anuncio [codAnuncio=" + codAnuncio + ", dsDescricao=" + dsDescricao + ", dtAnuncio=" + dtAnuncio
 				+ ", nmNome=" + nmNome + ", vlPreco=" + vlPreco + ", vlStatus=" + vlStatus + ", blxAlteracaos="
-				+ blxAlteracaos + "]";
+				+ blxAlteracoes + "]";
 	}
 }

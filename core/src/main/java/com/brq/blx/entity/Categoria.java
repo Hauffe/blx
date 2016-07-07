@@ -25,7 +25,7 @@ public class Categoria implements Serializable {
 	
 	/* RELAÇÕES */
 
-	@OneToMany(mappedBy = "blxCategoria")
+	@OneToMany(mappedBy = "blxCategoria", fetch = FetchType.EAGER)
 	private List<Anuncio> blxAnuncios;
 
 	/* RELAÇÕES JOINCOLUMN */

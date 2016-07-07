@@ -1,3 +1,4 @@
+
 package blx.persistence;
 
 import java.util.List;
@@ -5,7 +6,6 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import com.brq.blx.entity.Categoria;
 
 public class CategoriaDao extends PatternDAO<Categoria> {
@@ -39,16 +39,58 @@ public class CategoriaDao extends PatternDAO<Categoria> {
 
 	@Override
 	public boolean cadastrar(Categoria categoria) throws Exception {
-		return false;
+		session = HibernateUtil.getSessionFactory().openSession();
+
+		transaction = session.beginTransaction();
+
+		session.save(categoria);
+	
+		transaction.commit();
+		
+		session.close();
+		return  true;
 	}
 
 	@Override
 	public boolean atualizar(Categoria categoria) throws Exception {
-		return false;
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		
+		session.update(categoria);
+		transaction.commit();
+		session.close();
+		
+		return true;
 	}
 
 	@Override
 	public List<Categoria> buscarTodos() throws Exception {
-		return null;
+		session = HibernateUtil.getSessionFactory().openSession();
+		query = session.createQuery("FROM Categoria");
+		
+		@SuppressWarnings("unchecked")
+		List<Categoria> listaCategoria = query.list();
+		
+		session.close();
+		return listaCategoria;
+	}
+
+	@Override
+	public List<Categoria> buscarComFiltro(String nome) throws Exception {
+		session = HibernateUtil.getSessionFactory().openSession();
+		query = session.createQuery("FROM Categoria WHERE nmNome= ?");
+		
+		query.setString(0, nome);
+		
+		@SuppressWarnings("unchecked")
+		List<Categoria> listaCategoria = query.list();
+		
+		session.close();
+		return listaCategoria;
+	}
+
+	@Override
+	public boolean atualizarStatus(Categoria categoria, Integer status) throws Exception {
+		return false;
 	}
 }

@@ -2,7 +2,6 @@ package com.brq.blx.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -47,14 +46,14 @@ public class Usuario implements Serializable {
 	private String vlSenha;
 
 	@Column(name = "VL_STATUS")
-	private BigDecimal vlStatus;
+	private Integer vlStatus;
 	
 	/* RELAÇÕES */
 
-	@OneToMany(mappedBy = "blxUsuario")
+	@OneToMany(mappedBy = "blxUsuario", fetch = FetchType.EAGER)
 	private List<Anuncio> blxAnuncios;
-
-	@OneToMany(mappedBy = "blxUsuario")
+	
+	@OneToMany(mappedBy = "blxUsuario", fetch = FetchType.EAGER)
 	private List<Contato> blxContatos;
 
 	/* RELAÇÕES JOINCOLUMN */
@@ -66,7 +65,7 @@ public class Usuario implements Serializable {
 	public Usuario() {}
 
 	public Usuario(long codUsuario, String nmNome, String vlEmail, String vlLogin, String vlRg, String vlSenha,
-			BigDecimal vlStatus, TipoUsuario blxTipousuario) {
+			Integer vlStatus, TipoUsuario blxTipousuario) {
 		super();
 		this.codUsuario = codUsuario;
 		this.nmNome = nmNome;
@@ -78,10 +77,8 @@ public class Usuario implements Serializable {
 		this.blxTipousuario = blxTipousuario;
 	}
 
-
-
 	public Usuario(long codUsuario, String nmNome, String vlEmail, String vlLogin, String vlRg, String vlSenha,
-			BigDecimal vlStatus, List<Anuncio> blxAnuncios, List<Contato> blxContatos, TipoUsuario blxTipousuario) {
+			Integer vlStatus, List<Anuncio> blxAnuncios, List<Contato> blxContatos, TipoUsuario blxTipousuario) {
 		super();
 		this.codUsuario = codUsuario;
 		this.nmNome = nmNome;
@@ -143,11 +140,11 @@ public class Usuario implements Serializable {
 		this.vlSenha = vlSenha;
 	}
 
-	public BigDecimal getVlStatus() {
+	public Integer getVlStatus() {
 		return this.vlStatus;
 	}
 
-	public void setVlStatus(BigDecimal vlStatus) {
+	public void setVlStatus(Integer vlStatus) {
 		this.vlStatus = vlStatus;
 	}
 

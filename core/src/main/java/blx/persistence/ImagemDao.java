@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import com.brq.blx.entity.Imagem;
 
 public class ImagemDao extends PatternDAO<Imagem> {
@@ -19,7 +18,7 @@ public class ImagemDao extends PatternDAO<Imagem> {
 	public static ImagemDao getInstance() {
 		return instance;
 	}
-	
+	 
 	@Override
 	public Imagem buscarPorId(Integer id) {
 		session = HibernateUtil.getSessionFactory().openSession();
@@ -39,16 +38,61 @@ public class ImagemDao extends PatternDAO<Imagem> {
 
 	@Override
 	public boolean cadastrar(Imagem imagem) throws Exception {
-		return false;
+		session = HibernateUtil.getSessionFactory().openSession();
+
+		transaction = session.beginTransaction();
+
+		session.save(imagem);
+	
+		transaction.commit();
+		
+		session.close();
+		return  true;
 	}
 
 	@Override
 	public boolean atualizar(Imagem imagem) throws Exception {
-		return false;
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		
+		session.update(imagem);
+		transaction.commit();
+		session.close();
+		
+		return true;
 	}
 
 	@Override
 	public List<Imagem> buscarTodos() throws Exception {
-		return null;
+		session = HibernateUtil.getSessionFactory().openSession();
+		query = session.createQuery("FROM Imagem");
+		
+		transaction = session.beginTransaction();
+			
+		@SuppressWarnings("unchecked")
+		List<Imagem> listaImagens = query.list();
+		
+		session.close();
+		return listaImagens;
+	}
+
+	@Override
+	public List<Imagem> buscarComFiltro(String nome) throws Exception {
+		session = HibernateUtil.getSessionFactory().openSession();
+		query = session.createQuery("FROM Imagem WHERE nmNome = ?");
+		
+		query.setString(0, nome);
+		
+		@SuppressWarnings("unchecked")
+		List<Imagem> listaImagens = query.list();
+		
+		session.close();
+		return listaImagens;
+	}
+
+	@Override
+	public boolean atualizarStatus(Imagem object, Integer status) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

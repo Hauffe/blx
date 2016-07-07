@@ -17,17 +17,17 @@ public class Contato implements Serializable {
 	private long codContato;
 
 	@Column(name = "VL_TELEFONEFIXO")
-	private String vlTelefonefixo;
+	private String vlTelefoneFixo;
 
 	@Column(name = "VL_TELEFONEMOVEL")
-	private String vlTelefonemovel;
+	private String vlTelefoneMovel;
 	
 	/* RELAÇÕES */
 
-	@OneToMany(mappedBy = "blxContato")
+	@OneToMany(mappedBy = "blxContato", fetch = FetchType.EAGER)
 	private List<Anuncio> blxAnuncios;
 	
-	@OneToMany(mappedBy = "blxContato")
+	@OneToMany(mappedBy = "blxContato", fetch = FetchType.EAGER)
 	private List<Endereco> blxEnderecos;
 
 	/* RELAÇÕES JOINCOLUMN */
@@ -41,24 +41,24 @@ public class Contato implements Serializable {
 	public Contato(long codContato, String vlTelefonefixo, String vlTelefonemovel) {
 		super();
 		this.codContato = codContato;
-		this.vlTelefonefixo = vlTelefonefixo;
-		this.vlTelefonemovel = vlTelefonemovel;
+		this.vlTelefoneFixo = vlTelefonefixo;
+		this.vlTelefoneMovel = vlTelefonemovel;
 	}
 	
-	public Contato(long codContato, String vlTelefonefixo, String vlTelefonemovel, Usuario blxUsuario) {
+	public Contato(long codContato, String vlTelefoneFixo, String vlTelefoneMovel, Usuario blxUsuario) {
 		super();
 		this.codContato = codContato;
-		this.vlTelefonefixo = vlTelefonefixo;
-		this.vlTelefonemovel = vlTelefonemovel;
+		this.vlTelefoneFixo = vlTelefoneFixo;
+		this.vlTelefoneMovel = vlTelefoneMovel;
 		this.blxUsuario = blxUsuario;
 	}
 
-	public Contato(long codContato, String vlTelefonefixo, String vlTelefonemovel, List<Anuncio> blxAnuncios,
+	public Contato(long codContato, String vlTelefoneFixo, String vlTelefoneMovel, List<Anuncio> blxAnuncios,
 			Usuario blxUsuario, List<Endereco> blxEnderecos) {
 		super();
 		this.codContato = codContato;
-		this.vlTelefonefixo = vlTelefonefixo;
-		this.vlTelefonemovel = vlTelefonemovel;
+		this.vlTelefoneFixo = vlTelefoneFixo;
+		this.vlTelefoneMovel = vlTelefoneMovel;
 		this.blxAnuncios = blxAnuncios;
 		this.blxUsuario = blxUsuario;
 		this.blxEnderecos = blxEnderecos;
@@ -72,20 +72,20 @@ public class Contato implements Serializable {
 		this.codContato = codContato;
 	}
 
-	public String getVlTelefonefixo() {
-		return this.vlTelefonefixo;
+	public String getVlTelefoneFixo() {
+		return this.vlTelefoneFixo;
 	}
 
-	public void setVlTelefonefixo(String vlTelefonefixo) {
-		this.vlTelefonefixo = vlTelefonefixo;
+	public void setVlTelefoneFixo(String vlTelefonefixo) {
+		this.vlTelefoneFixo = vlTelefonefixo;
 	}
 
-	public String getVlTelefonemovel() {
-		return this.vlTelefonemovel;
+	public String getVlTelefoneMovel() {
+		return this.vlTelefoneMovel;
 	}
 
-	public void setVlTelefonemovel(String vlTelefonemovel) {
-		this.vlTelefonemovel = vlTelefonemovel;
+	public void setVlTelefoneMovel(String vlTelefonemovel) {
+		this.vlTelefoneMovel = vlTelefonemovel;
 	}
 
 	public List<Anuncio> getBlxAnuncios() {
@@ -106,7 +106,7 @@ public class Contato implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Contato [codContato=" + codContato + ", vlTelefonefixo=" + vlTelefonefixo + ", vlTelefonemovel="
-				+ vlTelefonemovel + ", blxUsuario=" + blxUsuario + "]";
+		return "Contato [codContato=" + codContato + ", vlTelefonefixo=" + vlTelefoneFixo + ", vlTelefonemovel="
+				+ vlTelefoneMovel + ", blxUsuario=" + blxUsuario + "]";
 	}
 }
