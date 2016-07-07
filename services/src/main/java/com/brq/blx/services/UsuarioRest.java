@@ -10,14 +10,13 @@ import com.brq.blx.entity.Anuncio;
 import com.brq.blx.entity.Categoria;
 import com.brq.blx.entity.Contato;
 import com.brq.blx.entity.Usuario;
+import com.brq.blx.persistence.AnuncioDao;
+import com.brq.blx.persistence.CategoriaDao;
+import com.brq.blx.persistence.UsuarioDao;
 import com.brq.blx.utility.HibernateProxyTypeAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-
-import blx.persistence.AnuncioDao;
-import blx.persistence.CategoriaDao;
-import blx.persistence.UsuarioDao;
 
 @Path("/usuario")
 public class UsuarioRest {

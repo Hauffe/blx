@@ -1,4 +1,4 @@
-package blx.persistence;
+package com.brq.blx.persistence;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

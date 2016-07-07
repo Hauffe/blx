@@ -1,4 +1,4 @@
-package blx.persistence;
+package com.brq.blx.persistence;
 
 import java.util.List;
 import org.hibernate.Query;
