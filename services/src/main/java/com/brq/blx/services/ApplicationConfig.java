@@ -14,6 +14,8 @@ public class ApplicationConfig extends Application {
 		final Set<Class<?>> classes = new HashSet<Class<?>>();
 
 		classes.add(UsuarioRest.class);
+		classes.add(AvaliacaoRest.class);
+		classes.add(AnuncioRest.class);
 		
 		return classes;
 	}

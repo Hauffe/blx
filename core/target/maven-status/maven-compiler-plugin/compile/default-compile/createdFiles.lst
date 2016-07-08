@@ -14,9 +14,7 @@ com\brq\blx\persistence\CategoriaDao.class
 com\brq\blx\entity\Usuario.class
 com\brq\blx\persistence\AnuncioDao.class
 com\brq\blx\persistence\HibernateUtil.class
-com\brq\blx\utility\HibernateProxyTypeAdapter$1.class
 com\brq\blx\entity\Imagem.class
 com\brq\blx\entity\Alteracao.class
 com\brq\blx\persistence\TipoUsuarioDao.class
-com\brq\blx\utility\HibernateProxyTypeAdapter.class
 com\brq\blx\persistence\AvaliacaoDao.class

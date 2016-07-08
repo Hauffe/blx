@@ -1,2 +1,4 @@
-com\brq\blx\services\ApplicationConfig.class
 com\brq\blx\services\UsuarioRest.class
+com\brq\blx\services\AvaliacaoRest.class
+com\brq\blx\services\ApplicationConfig.class
+com\brq\blx\services\AnuncioRest.class
