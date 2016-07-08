@@ -13,7 +13,6 @@ import com.brq.blx.entity.Usuario;
 import com.brq.blx.persistence.AnuncioDao;
 import com.brq.blx.persistence.CategoriaDao;
 import com.brq.blx.persistence.UsuarioDao;
-import com.brq.blx.utility.HibernateProxyTypeAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -72,14 +71,9 @@ public class UsuarioRest {
 	public Response cadastrarAnuncioJSON() {
 		JsonObject obj = new JsonObject();
 		
-		try{
-			GsonBuilder b = new GsonBuilder();
-			b.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
-
-			Gson gson = b.create();
-			
+		try{			
 			Anuncio anuncio = AnuncioDao.getInstance().buscarPorId(15);
-			obj.addProperty("result",  gson.toJson(anuncio));
+			obj.addProperty("result",  new Gson().toJson(anuncio));
 
 			
 		} catch(Exception e){
