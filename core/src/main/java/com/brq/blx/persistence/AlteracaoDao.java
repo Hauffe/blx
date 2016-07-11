@@ -89,7 +89,7 @@ public class AlteracaoDao extends PatternDAO<Alteracao> {
 	}
 
 	@Override
-	public boolean atualizarStatus(Alteracao alteracao, Integer status) throws Exception {
+	public boolean atualizarStatus(Alteracao alteracao) throws Exception {
 		return false;
 	}
 }

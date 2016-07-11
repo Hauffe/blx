@@ -89,7 +89,7 @@ public class TipoUsuarioDao extends PatternDAO<TipoUsuario> {
 	}
 
 	@Override
-	public boolean atualizarStatus(TipoUsuario object, Integer status) throws Exception {
+	public boolean atualizarStatus(TipoUsuario object) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
 	}

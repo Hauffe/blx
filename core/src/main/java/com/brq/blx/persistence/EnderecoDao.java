@@ -89,7 +89,7 @@ public class EnderecoDao extends PatternDAO<Endereco> {
 	}
 
 	@Override
-	public boolean atualizarStatus(Endereco object, Integer status) throws Exception {
+	public boolean atualizarStatus(Endereco object) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
 	}

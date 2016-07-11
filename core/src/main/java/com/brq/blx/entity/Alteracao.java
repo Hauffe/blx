@@ -39,7 +39,7 @@ public class Alteracao implements Serializable {
 	}
 
 	public long getCodAlteracao() {
-		return this.codAlteracao;
+		return codAlteracao;
 	}
 
 	public void setCodAlteracao(long codAlteracao) {
@@ -47,24 +47,26 @@ public class Alteracao implements Serializable {
 	}
 
 	public String getDsDescricao() {
-		return this.dsDescricao;
+		return dsDescricao;
 	}
 
 	public void setDsDescricao(String dsDescricao) {
 		this.dsDescricao = dsDescricao;
 	}
 
-	public Date getDTAlteracao() {
-		return this.dtAlteracao;
+	public Date getDtAlteracao() {
+		return dtAlteracao;
 	}
 
-	public void setVlAlteracao(Date vlAlteracao) {
-		this.dtAlteracao = vlAlteracao;
+	public void setDtAlteracao(Date dtAlteracao) {
+		this.dtAlteracao = dtAlteracao;
 	}
 
-	@Override
-	public String toString() {
-		return "Alteracao [codAlteracao=" + codAlteracao + ", dsDescricao=" + dsDescricao + ", blxAnuncio=" + blxAnuncio
-				+ "]";
+	public Anuncio getBlxAnuncio() {
+		return blxAnuncio;
+	}
+
+	public void setBlxAnuncio(Anuncio blxAnuncio) {
+		this.blxAnuncio = blxAnuncio;
 	}
 }

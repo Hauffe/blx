@@ -90,7 +90,7 @@ public class CategoriaDao extends PatternDAO<Categoria> {
 	}
 
 	@Override
-	public boolean atualizarStatus(Categoria categoria, Integer status) throws Exception {
+	public boolean atualizarStatus(Categoria categoria) throws Exception {
 		return false;
 	}
 }

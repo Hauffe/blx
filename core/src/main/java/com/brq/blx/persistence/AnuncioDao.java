@@ -92,9 +92,37 @@ public class AnuncioDao extends PatternDAO<Anuncio> {
 		return listaAnuncio;
 	}
 
+	public List<Anuncio> buscarMeusAnuncios(Integer id) {
+		session = HibernateUtil.getSessionFactory().openSession();
+		query = session.createQuery("FROM Anuncio WHERE blxUsuario = ?");
+		
+		query.setInteger(0, id);
+		
+		@SuppressWarnings("unchecked")
+		List<Anuncio> listaAnuncio = query.list();
+		
+		session.close();
+		return listaAnuncio;
+	}
 
 	@Override
-	public boolean atualizarStatus(Anuncio anuncio, Integer status) throws Exception {
-		return false;
+	public boolean atualizarStatus(Anuncio anuncio) throws Exception {
+		session = HibernateUtil.getSessionFactory().openSession();
+		
+		query = session.createQuery("FROM Anuncio WHERE codAnuncio = ?");
+		query.setLong(0, anuncio.getCodAnuncio());
+
+		@SuppressWarnings("unchecked")
+		List<Anuncio> anuncios = query.list();
+
+		Anuncio anuncioFound = anuncios.get(0);
+		anuncioFound.setVlStatus(anuncio.getVlStatus());
+		
+		transaction = session.beginTransaction();
+		session.update(anuncioFound);
+		transaction.commit();
+		session.close();
+		
+		return true;
 	}
 }

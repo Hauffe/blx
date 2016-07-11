@@ -21,6 +21,9 @@ public class Endereco implements Serializable {
 
 	@Column(name = "VL_CIDADE")
 	private String vlCidade;
+	
+	@Column(name = "VL_NUMERO")
+	private Integer vlNumero;
 
 	@Column(name = "VL_RUA")
 	private String vlRua;
@@ -36,11 +39,12 @@ public class Endereco implements Serializable {
 
 	public Endereco() {}
 
-	public Endereco(long codEndereco, String vlCep, String vlCidade, String vlRua, String vlUf, Contato blxContato) {
+	public Endereco(long codEndereco, String vlCep, String vlCidade, Integer vlNumero, String vlRua, String vlUf, Contato blxContato) {
 		super();
 		this.codEndereco = codEndereco;
 		this.vlCep = vlCep;
 		this.vlCidade = vlCidade;
+		this.vlNumero = vlNumero;
 		this.vlRua = vlRua;
 		this.vlUf = vlUf;
 		this.blxContato = blxContato;
@@ -84,6 +88,22 @@ public class Endereco implements Serializable {
 
 	public void setVlUf(String vlUf) {
 		this.vlUf = vlUf;
+	}
+
+	public Integer getVlNumero() {
+		return vlNumero;
+	}
+
+	public void setVlNumero(Integer vlNumero) {
+		this.vlNumero = vlNumero;
+	}
+
+	public Contato getBlxContato() {
+		return blxContato;
+	}
+
+	public void setBlxContato(Contato blxContato) {
+		this.blxContato = blxContato;
 	}
 
 	@Override

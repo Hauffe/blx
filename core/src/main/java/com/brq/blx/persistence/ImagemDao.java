@@ -91,7 +91,7 @@ public class ImagemDao extends PatternDAO<Imagem> {
 	}
 
 	@Override
-	public boolean atualizarStatus(Imagem object, Integer status) throws Exception {
+	public boolean atualizarStatus(Imagem object) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
 	}

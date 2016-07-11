@@ -14,5 +14,5 @@ public abstract class PatternDAO<T> {
 	
 	public abstract List<T> buscarComFiltro(String nome) throws Exception;
 	
-	public abstract boolean atualizarStatus(T object, Integer status) throws Exception;  
+	public abstract boolean atualizarStatus(T object) throws Exception;  
 }

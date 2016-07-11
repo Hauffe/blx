@@ -88,7 +88,7 @@ public class ContatoDao extends PatternDAO<Contato> {
 	}
 
 	@Override
-	public boolean atualizarStatus(Contato contato, Integer status) throws Exception {
+	public boolean atualizarStatus(Contato contato) throws Exception {
 		return false;
 	}
 }

@@ -121,10 +121,10 @@ public class UsuarioDao extends PatternDAO<Usuario> {
 	}
 
 	@Override
-	public boolean atualizarStatus(Usuario usuario, Integer status) throws Exception {
+	public boolean atualizarStatus(Usuario usuario) throws Exception {
 		session = HibernateUtil.getSessionFactory().openSession();
 		transaction = session.beginTransaction();
-		usuario.setVlStatus(status);
+		usuario.setVlStatus(usuario.getVlStatus());
 		
 		session.update(usuario);
 	
