@@ -61,8 +61,8 @@ public class AnuncioRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response alterar(Anuncio a) {
 		try{
-			a.setDtAnuncio(new Date());
-			a.setVlStatus(1);
+//			a.setDtAnuncio(new Date());
+//			a.setVlStatus(1);
 			AnuncioDao.getInstance().atualizar(a);
 			// cadastro de alteracao
 			Alteracao al = new Alteracao();

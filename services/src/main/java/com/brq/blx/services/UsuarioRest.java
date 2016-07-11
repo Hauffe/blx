@@ -1,5 +1,8 @@
 package com.brq.blx.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -9,10 +12,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.brq.blx.entity.Anuncio;
 import com.brq.blx.entity.Contato;
 import com.brq.blx.entity.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.brq.blx.persistence.AnuncioDao;
 import com.brq.blx.persistence.ContatoDao;
 import com.brq.blx.persistence.UsuarioDao;
 
@@ -43,7 +48,7 @@ public class UsuarioRest {
 			return Response.ok(gson.toJson("Usuario cadastrado!")).build();
 		}catch(Exception e) {
 			e.printStackTrace();
-			return Response.ok(gson.toJson("Usuario nao cadastrado!")).build();
+			return Response.ok(gson.toJson("Erro ao acessar servidor")).build();
 		}
 	}
 	
@@ -52,16 +57,13 @@ public class UsuarioRest {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response editar(Usuario u) {
-		JsonObject obj = new JsonObject();
 		try{
-//			new UsuarioDao().atualizar(u);
 			UsuarioDao.getInstance().atualizar(u);
-			obj.addProperty("result", "Usuário atualizado!");
-		}catch(Exception e){
+			return Response.ok(gson.toJson("Usuário atualizado!")).build();
+		}catch(Exception e) {
 			e.printStackTrace();
-			obj.addProperty("result", "Usuário não atualizado!");
+			return Response.ok(gson.toJson("Erro ao acessar servidor")).build();
 		}
-		return Response.ok(new Gson().toJson(obj)).build();
 	}
 	
 	@POST
@@ -70,9 +72,9 @@ public class UsuarioRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response autenticar(Usuario u) {
 		try{
-			if(UsuarioDao.getInstance().autenticar(u)) {
+			if(UsuarioDao.getInstance().autenticar(u))
 				return Response.ok(gson.toJson("autenticado")).build();
-			} 
+			
 			return Response.ok(gson.toJson("nautenticado")).build();
 		} catch(Exception e){
 			e.printStackTrace();
@@ -85,19 +87,16 @@ public class UsuarioRest {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response buscarPorId(@PathParam("id") String id) {
-		JsonObject obj = new JsonObject();
 		try{
-			Usuario usuario = new UsuarioDao().buscarPorId(new Integer(id));
-			if(usuario != null) {
-				obj.addProperty("result", new Gson().toJson(usuario));
-			} else {
-				obj.addProperty("result", "Usuário não encontrado");
-			}
+			Usuario usuario = UsuarioDao.getInstance().buscarPorId(new Integer(id));
+			if(usuario != null)
+				return Response.ok(gson.toJson(usuario)).build();
+			
+			return Response.ok(gson.toJson("Usuario nao encontrado")).build();
 		} catch(Exception e){
 			e.printStackTrace();
-			obj.addProperty("result", "Usuário não encontrado");
+			return Response.ok(gson.toJson("Erro ao acessar servidor")).build();
 		}
-		return Response.ok(new Gson().toJson(obj)).build();
 	}
 	
 	@GET
@@ -105,19 +104,50 @@ public class UsuarioRest {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response buscar(@PathParam("busca") String busca) {
-		JsonObject obj = new JsonObject();
 		try{
-//			List<Usuario> usuarios = new ArrayList<>();
-//			usuarios = new UsuarioDao().buscarUsuarios(busca);
-//			if(usuarios.size() > 0) {
-//				obj.addProperty("result", new Gson().toJson(usuarios));
-//			} else {
-//				obj.addProperty("result", "Usuário não encontrado");
-//			}
+			List<Usuario> usuarios = new ArrayList<>();
+			usuarios = new UsuarioDao().buscarComFiltro(busca);
+			if(usuarios.size() > 0)
+				return Response.ok(gson.toJson(usuarios)).build();
+			
+			return Response.ok(gson.toJson("Nenhum usuario")).build();
+			
 		} catch(Exception e){
 			e.printStackTrace();
-			obj.addProperty("result", "Usuário não encontrado");
+			return Response.ok(gson.toJson("Erro ao acessar servidor")).build();
 		}
-		return Response.ok(new Gson().toJson(obj)).build();
+	}
+	
+	@GET
+	@Path("/listar")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response listar() {
+		try{
+			List<Usuario> usuarios = new ArrayList<>();
+			usuarios = new UsuarioDao().buscarTodos();
+			if(usuarios.size() > 0)
+				return Response.ok(gson.toJson(usuarios)).build();
+			
+			return Response.ok(gson.toJson("Nenhum usuario")).build();
+			
+		} catch(Exception e){
+			e.printStackTrace();
+			return Response.ok(gson.toJson("Erro ao acessar servidor")).build();
+		}
+	}
+	
+	@POST
+	@Path("/atualizarStatus")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response atualizarStatus(Usuario u) {
+		try{
+			UsuarioDao.getInstance().atualizarStatus(u);
+			return Response.ok(gson.toJson("Status alterado!")).build();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return Response.status(500).entity(gson.toJson("Erro ao acessar servidor")).build();
+		}
 	}
 }

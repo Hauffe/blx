@@ -110,7 +110,8 @@ public class UsuarioDao extends PatternDAO<Usuario> {
 	@Override
 	public List<Usuario> buscarComFiltro(String nome) throws Exception {
 		session = HibernateUtil.getSessionFactory().openSession();
-		query = session.createQuery("FROM Usuario WHERE nmNome = nome");
+		query = session.createQuery("FROM Usuario WHERE nmNome = ?");
+		query.setString(0, nome);
 		
 		@SuppressWarnings("unchecked")
 		List<Usuario> listaUsuarios = query.list();
