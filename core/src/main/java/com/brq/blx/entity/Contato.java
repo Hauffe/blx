@@ -28,7 +28,8 @@ public class Contato implements Serializable {
 
 	/* RELAÇÕES JOINCOLUMN */
 	
-	@OneToOne(mappedBy="blxContato", fetch=FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ENDERECO_COD_ENDERECO")
 	private Endereco blxEndereco;
 	
 	@ManyToOne

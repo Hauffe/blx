@@ -33,8 +33,7 @@ public class Endereco implements Serializable {
 	
 	/* RELAÇÕES JOINCOLUMN */
 
-	@OneToOne
-	@JoinColumn(name = "CONTATO_COD_CONTATO")
+	@OneToOne(mappedBy="blxEndereco", fetch=FetchType.EAGER)
 	private Contato blxContato;
 
 	public Endereco() {}

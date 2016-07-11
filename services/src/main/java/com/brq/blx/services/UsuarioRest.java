@@ -1,8 +1,5 @@
 package com.brq.blx.services;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -12,30 +9,42 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.brq.blx.entity.Contato;
 import com.brq.blx.entity.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-
+import com.brq.blx.persistence.ContatoDao;
 import com.brq.blx.persistence.UsuarioDao;
 
 @Path("/usuario")
 public class UsuarioRest {
+	
+	private Gson gson;
+	
+	public UsuarioRest() {
+		super();
+		this.gson = new Gson();
+	}
 
 	@POST
 	@Path("/cadastrar")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response cadastrar(Usuario u) {
-		JsonObject obj = new JsonObject();
-		try{
-//			new UsuarioDao().cadastrar(u);
+	public Response cadastrar(Contato c) {
+		try {
+			//Cadastro do usuario
+			Usuario u = c.getBlxUsuario();
+			u.setVlStatus(1);
 			UsuarioDao.getInstance().cadastrar(u);
-			obj.addProperty("result", "Usuário cadastrado!");
-		}catch(Exception e){
+			
+			//Cadastro do contato
+			ContatoDao.getInstance().cadastrar(c);
+			
+			return Response.ok(gson.toJson("Usuario cadastrado!")).build();
+		}catch(Exception e) {
 			e.printStackTrace();
-			obj.addProperty("result", "Usuário não cadastrado!");
+			return Response.ok(gson.toJson("Usuario nao cadastrado!")).build();
 		}
-		return Response.ok(new Gson().toJson(obj)).build();
 	}
 	
 	@POST
@@ -55,24 +64,20 @@ public class UsuarioRest {
 		return Response.ok(new Gson().toJson(obj)).build();
 	}
 	
-	@GET
+	@POST
 	@Path("/autenticar")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response autenticar(Usuario u) {
-		JsonObject obj = new JsonObject();
 		try{
-//			Boolean res = new UsuarioDao().verificar(u);
-//			if(res) {
-//				obj.addProperty("result", "OK");
-//			} else {
-//				obj.addProperty("result", "NOK");
-//			}
+			if(UsuarioDao.getInstance().autenticar(u)) {
+				return Response.ok(gson.toJson("autenticado")).build();
+			} 
+			return Response.ok(gson.toJson("nautenticado")).build();
 		} catch(Exception e){
 			e.printStackTrace();
-			obj.addProperty("result", "NOK");
+			return Response.ok(gson.toJson("Erro ao acessar servidor")).build();
 		}
-		return Response.ok(new Gson().toJson(obj)).build();
 	}
 	
 	@GET

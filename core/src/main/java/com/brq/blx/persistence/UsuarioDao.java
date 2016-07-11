@@ -133,4 +133,21 @@ public class UsuarioDao extends PatternDAO<Usuario> {
 		
 		return true;	
 	}
+	
+	public boolean autenticar(Usuario usuario) throws Exception {
+		session = HibernateUtil.getSessionFactory().openSession();
+		query = session.createQuery("FROM Usuario WHERE vlLogin = ? AND vlSenha = ?");
+		query.setString(0, usuario.getVlLogin());
+		query.setString(1, usuario.getVlSenha());
+
+		@SuppressWarnings("unchecked")
+		List<Usuario> user = query.list();
+				
+		session.close();
+		
+		if(user.size() > 0)
+			return true;
+
+		return false;
+	}
 }
