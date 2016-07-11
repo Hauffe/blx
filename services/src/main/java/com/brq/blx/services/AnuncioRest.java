@@ -1,6 +1,7 @@
 package com.brq.blx.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -13,7 +14,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.brq.blx.entity.Anuncio;
+import com.brq.blx.entity.Categoria;
+import com.brq.blx.entity.Contato;
+import com.brq.blx.entity.TipoUsuario;
+import com.brq.blx.entity.Usuario;
 import com.brq.blx.persistence.AnuncioDao;
+import com.brq.blx.persistence.CategoriaDao;
+import com.brq.blx.persistence.ContatoDao;
+import com.brq.blx.persistence.UsuarioDao;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -26,6 +34,9 @@ public class AnuncioRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response cadastrar(Anuncio a) {
 		try{
+			a.setDtAnuncio(new Date());
+			a.setVlStatus(1);
+			
 			AnuncioDao.getInstance().cadastrar(a);
 			return Response.ok(new Gson().toJson("Anuncio cadastrado!")).build();
 		}catch(Exception e){

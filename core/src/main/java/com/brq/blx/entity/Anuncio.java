@@ -96,6 +96,18 @@ public class Anuncio implements Serializable {
 	public void setNmNome(String nmNome) {
 		this.nmNome = nmNome;
 	}
+	
+	public Date getDtAnuncio() {
+		return dtAnuncio;
+	}
+
+	public void setDtAnuncio(Date dtAnuncio) {
+		this.dtAnuncio = dtAnuncio;
+	}
+
+	public Categoria getBlxCategoria() {
+		return blxCategoria;
+	}
 
 	public double getVlPreco() {
 		return vlPreco;

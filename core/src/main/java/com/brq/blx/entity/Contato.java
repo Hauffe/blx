@@ -2,6 +2,9 @@ package com.brq.blx.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 @Entity
@@ -21,8 +24,12 @@ public class Contato implements Serializable {
 
 	@Column(name = "VL_TELEFONEMOVEL")
 	private String vlTelefoneMovel;
+	
 
 	/* RELAÇÕES JOINCOLUMN */
+	
+	@OneToOne(mappedBy="blxContato", fetch=FetchType.EAGER)
+	private Endereco blxEndereco;
 	
 	@ManyToOne
 	@JoinColumn(name = "USUARIO_COD_USUARIO") 
@@ -53,6 +60,22 @@ public class Contato implements Serializable {
 		this.vlTelefoneMovel = vlTelefoneMovel;
 		this.blxUsuario = blxUsuario;
 		
+	}
+
+	public Endereco getBlxEndereco() {
+		return blxEndereco;
+	}
+
+	public void setBlxEndereco(Endereco blxEndereco) {
+		this.blxEndereco = blxEndereco;
+	}
+
+	public Usuario getBlxUsuario() {
+		return blxUsuario;
+	}
+
+	public void setBlxUsuario(Usuario blxUsuario) {
+		this.blxUsuario = blxUsuario;
 	}
 
 	public long getCodContato() {

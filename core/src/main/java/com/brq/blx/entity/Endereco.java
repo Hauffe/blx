@@ -30,8 +30,9 @@ public class Endereco implements Serializable {
 	
 	/* RELAÇÕES JOINCOLUMN */
 
-	@ManyToOne
-	@JoinColumn(name = "CONTATO_COD_CONTATO") private Contato blxContato;
+	@OneToOne
+	@JoinColumn(name = "CONTATO_COD_CONTATO")
+	private Contato blxContato;
 
 	public Endereco() {}
 
