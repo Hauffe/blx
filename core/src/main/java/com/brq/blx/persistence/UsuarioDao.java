@@ -9,7 +9,7 @@ import com.brq.blx.infraestrutura.AbstractRepository;
 @Dependent
 public class UsuarioDao extends AbstractRepository<Usuario> {
 	
-	public boolean autenticar (Usuario usuario) throws Exception {
+	public Usuario buscarPorLogin(Usuario usuario) throws Exception {
 		@SuppressWarnings("unchecked")
 		List<Usuario> usuarios = this.entityManager.createQuery("FROM Usuario WHERE vlLogin = :login AND vlSenha = :senha")
 			.setParameter("login", usuario.getVlLogin())
@@ -17,14 +17,14 @@ public class UsuarioDao extends AbstractRepository<Usuario> {
 			.getResultList();
 		
 		if(usuarios.size() > 0 ) {
-			return true;
+			return usuarios.get(0);
 		}
 		
-		return false;
+		return null;
 	}
 	
 	public List<Usuario> buscarPorNome (String nome) throws Exception {
-		List<Usuario> usuarios = this.entityManager.createQuery("FROM Usuario WHERE nmNome like :nome", Usuario.class )
+		List<Usuario> usuarios = this.entityManager.createQuery("FROM Usuario WHERE nmNome like :nome", Usuario.class)
 				.setParameter("nome", "%"+nome+"%")
 				.getResultList();
 	

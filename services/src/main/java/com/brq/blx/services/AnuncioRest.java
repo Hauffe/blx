@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -22,7 +21,6 @@ import com.brq.blx.persistence.AnuncioDao;
 import com.google.gson.Gson;
 
 @Path("/anuncio")
-@Stateless
 public class AnuncioRest {
 	
 	@Inject

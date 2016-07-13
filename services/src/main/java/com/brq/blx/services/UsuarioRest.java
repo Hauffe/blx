@@ -76,10 +76,11 @@ public class UsuarioRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response autenticar(Usuario u) {
 		try {
-			if (usuarioDao.autenticar(u))
-				return Response.ok(gson.toJson("autenticado")).build();
+			Usuario usuario = usuarioDao.buscarPorLogin(u);
+			if(usuario != null)
+				return Response.ok(gson.toJson(usuario)).build();
 
-			return Response.ok(gson.toJson("nautenticado")).build();
+			return Response.ok(gson.toJson("usuario nao existe")).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Response.ok(gson.toJson("Erro ao acessar servidor")).build();
