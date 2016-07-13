@@ -19,15 +19,11 @@ import com.brq.blx.entity.Alteracao;
 import com.brq.blx.entity.Anuncio;
 import com.brq.blx.persistence.AlteracaoDao;
 import com.brq.blx.persistence.AnuncioDao;
-import com.brq.blx.persistence.UsuarioDao;
 import com.google.gson.Gson;
 
 @Path("/anuncio")
 @Stateless
 public class AnuncioRest {
-	
-	@Inject
-	private UsuarioDao usuarioDao;
 	
 	@Inject
 	private AnuncioDao anuncioDao;
@@ -67,16 +63,15 @@ public class AnuncioRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response alterar(Anuncio a) {
 		try{
-//			a.setDtAnuncio(new Date());
-//			a.setVlStatus(1);
 			anuncioDao.atualizar(a);
+			
 			// cadastro de alteracao
 			Alteracao al = new Alteracao();
 			al.setDsDescricao(this.alteracoes(a));
 			al.setDtAlteracao(new Date());
 			al.setBlxAnuncio(a);
 			alteracaoDao.cadastrar(al);
-			return Response.ok(gson.toJson("Anúncio alterado!")).build();
+			return Response.ok(gson.toJson("Anuncio alterado!")).build();
 			
 		}catch(Exception e){
 			e.printStackTrace();
@@ -110,7 +105,7 @@ public class AnuncioRest {
 			if(a != null)
 				return Response.ok(gson.toJson(a)).build();
 			else 
-				return Response.ok(gson.toJson("anuncio não encontrado")).build();
+				return Response.ok(gson.toJson("anuncio nao encontrado")).build();
 			
 		}catch(Exception e){
 			e.printStackTrace();
@@ -126,11 +121,11 @@ public class AnuncioRest {
 	public Response buscar(@PathParam("busca") String busca) {
 		try{
 			List<Anuncio> anuncios = new ArrayList<>();
-			anuncios = new AnuncioDao().buscarPorNome(busca);
+			anuncios = anuncioDao.buscarPorNome(busca);
 			if(anuncios.size() > 0)
 				return Response.ok(gson.toJson(anuncios)).build();
 			else
-				return Response.ok(gson.toJson("anuncio não encontrado")).build();
+				return Response.ok(gson.toJson("anuncio nao encontrado")).build();
 			
 		} catch(Exception e){
 			e.printStackTrace();
@@ -145,11 +140,11 @@ public class AnuncioRest {
 	public Response meusAnuncios(@PathParam("id") String id) {
 		try{
 			List<Anuncio> anuncios = new ArrayList<>();
-			anuncios = new AnuncioDao().buscarMeusAnuncios(new Integer(id));
+			anuncios = anuncioDao.buscarMeusAnuncios(new Integer(id));
 			if(anuncios.size() > 0)
 				return Response.ok(gson.toJson(anuncios)).build();
 			else
-				return Response.ok(gson.toJson("anuncio não encontrado")).build();
+				return Response.ok(gson.toJson("anuncio nao encontrado")).build();
 			
 		} catch(Exception e){
 			e.printStackTrace();
@@ -163,9 +158,6 @@ public class AnuncioRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response atualizarStatus(Anuncio a) {
 		try{
-			
-			//TRAVA AÍ, TRAVA AÍ!@!
-			//VC PRECISA SETAR OS STATUS AQUI!@#!@$!@#
 			anuncioDao.atualizar(a);
 			return Response.ok(gson.toJson("Status alterado!")).build();
 			
@@ -176,7 +168,6 @@ public class AnuncioRest {
 	}
 	
 	public String alteracoes(Anuncio a) {
-		
 		String an = "Nome: " + a.getNmNome() +
 					", Descricao: " + a.getDsDescricao() +
 					", Preco: " + a.getVlPreco() +
@@ -190,8 +181,6 @@ public class AnuncioRest {
 					", Contato cep: " + a.getBlxContato().getBlxEndereco().getVlCep() +
 					", Contato cidade: " + a.getBlxContato().getBlxEndereco().getVlCidade() +
 					", Contato estado: " + a.getBlxContato().getBlxEndereco().getVlUf();
-		
 		return an;
 	}
-	
 }

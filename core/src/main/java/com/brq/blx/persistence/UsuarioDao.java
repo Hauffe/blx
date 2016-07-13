@@ -11,9 +11,10 @@ public class UsuarioDao extends AbstractRepository<Usuario> {
 	
 	public boolean autenticar (Usuario usuario) throws Exception {
 		@SuppressWarnings("unchecked")
-		List<Usuario> usuarios = this.entityManager.createQuery("FROM Usuario WHERE vlLogin = ? AND vlSenha = ?").getResultList();
-		this.entityManager.setProperty(usuario.getVlLogin(), 0);
-		this.entityManager.setProperty(usuario.getVlSenha(), 1);
+		List<Usuario> usuarios = this.entityManager.createQuery("FROM Usuario WHERE vlLogin = :login AND vlSenha = :senha")
+			.setParameter("login", usuario.getVlLogin())
+			.setParameter("senha", usuario.getVlSenha())
+			.getResultList();
 		
 		if(usuarios.size() > 0 ) {
 			return true;
@@ -22,12 +23,11 @@ public class UsuarioDao extends AbstractRepository<Usuario> {
 		return false;
 	}
 	
-	
-	public List<Usuario> buscarPorNome (String nome) throws Exception
-	{
-		List<Usuario> usuarios = this.entityManager.createQuery("FROM " + this.entityType + "WHERE nmNome = :nome", Usuario.class ).setParameter("nome", nome).getResultList();
+	public List<Usuario> buscarPorNome (String nome) throws Exception {
+		List<Usuario> usuarios = this.entityManager.createQuery("FROM Usuario WHERE nmNome like :nome", Usuario.class )
+				.setParameter("nome", "%"+nome+"%")
+				.getResultList();
 	
 		return usuarios;
 	}
-
 }

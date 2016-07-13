@@ -63,7 +63,7 @@ public class UsuarioRest {
 	public Response editar(Usuario u) {
 		try {
 			usuarioDao.atualizar(u);
-			return Response.ok(gson.toJson("Usuário atualizado!")).build();
+			return Response.ok(gson.toJson("Usuario atualizado!")).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Response.ok(gson.toJson("Erro ao acessar servidor")).build();
@@ -146,10 +146,6 @@ public class UsuarioRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response atualizarStatus(Usuario u) {
 		try {
-
-			// TRAVA AÍ, TRAVA AÍ
-			// PRECISA SETAR O STATUS DO USUÁRIO AQUI, MANUALMENTE!@#!@$!@
-
 			usuarioDao.atualizar(u);
 			return Response.ok(gson.toJson("Status alterado!")).build();
 
