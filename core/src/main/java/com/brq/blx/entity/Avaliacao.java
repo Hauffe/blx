@@ -2,6 +2,9 @@ package com.brq.blx.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.google.gson.annotations.Expose;
+
 import java.util.Date;
 
 @Entity
@@ -14,12 +17,15 @@ public class Avaliacao implements Serializable {
 	@SequenceGenerator(name = "BLX_AVALIACAO_CODAVALIACAO_GENERATOR", sequenceName = "SEQ_ID_AVALIACAO", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BLX_AVALIACAO_CODAVALIACAO_GENERATOR")
 	@Column(name = "COD_AVALIACAO")
+	@Expose
 	private long codAvaliacao;
 
+	@Expose
 	@Temporal(TemporalType.DATE)
 	@Column(name = "DT_AVALIACAO")
 	private Date dtAvaliacao;
 
+	@Expose
 	@Column(name = "VL_NOTA")
 	private String vlNota;
 	

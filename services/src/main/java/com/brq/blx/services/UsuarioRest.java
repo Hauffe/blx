@@ -18,6 +18,7 @@ import com.brq.blx.entity.Usuario;
 import com.brq.blx.persistence.ContatoDao;
 import com.brq.blx.persistence.UsuarioDao;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 @Path("/usuario")
 public class UsuarioRest {
@@ -32,7 +33,7 @@ public class UsuarioRest {
 
 	public UsuarioRest() {
 		super();
-		this.gson = new Gson();
+		this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 	}
 
 	@POST
@@ -129,7 +130,8 @@ public class UsuarioRest {
 	public Response listar() {
 		try {
 			List<Usuario> usuarios = new ArrayList<>();
-			usuarios = usuarioDao.buscarTodos();
+			usuarios = usuarioDao.buscarTodos("Usuario");
+			
 			if (usuarios.size() > 0)
 				return Response.ok(gson.toJson(usuarios)).build();
 

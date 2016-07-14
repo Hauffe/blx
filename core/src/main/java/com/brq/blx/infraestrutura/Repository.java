@@ -8,7 +8,7 @@ public interface Repository<E> {
 	
 	public boolean atualizar( E entity );
 	
-	public List<E> buscarTodos ();
+	public List<E> buscarTodos ( String className );
 	
 	public E buscarPorId (long id);
 	

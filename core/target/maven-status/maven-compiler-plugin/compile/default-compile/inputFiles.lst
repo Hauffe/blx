@@ -1,5 +1,6 @@
 C:\Users\guilhermetabalipa\git\blx-backapp\core\src\main\java\com\brq\blx\entity\Anuncio.java
 C:\Users\guilhermetabalipa\git\blx-backapp\core\src\main\java\com\brq\blx\persistence\AvaliacaoDao.java
+C:\Users\guilhermetabalipa\git\blx-backapp\core\src\main\java\com\brq\blx\infraestrutura\AbstractRepository.java
 C:\Users\guilhermetabalipa\git\blx-backapp\core\src\main\java\com\brq\blx\persistence\CategoriaDao.java
 C:\Users\guilhermetabalipa\git\blx-backapp\core\src\main\java\com\brq\blx\persistence\EnderecoDao.java
 C:\Users\guilhermetabalipa\git\blx-backapp\core\src\main\java\com\brq\blx\entity\Alteracao.java
@@ -7,12 +8,11 @@ C:\Users\guilhermetabalipa\git\blx-backapp\core\src\main\java\com\brq\blx\entity
 C:\Users\guilhermetabalipa\git\blx-backapp\core\src\main\java\com\brq\blx\persistence\TipoUsuarioDao.java
 C:\Users\guilhermetabalipa\git\blx-backapp\core\src\main\java\com\brq\blx\entity\Imagem.java
 C:\Users\guilhermetabalipa\git\blx-backapp\core\src\main\java\com\brq\blx\persistence\ContatoDao.java
-C:\Users\guilhermetabalipa\git\blx-backapp\core\src\main\java\com\brq\blx\persistence\PatternDAO.java
 C:\Users\guilhermetabalipa\git\blx-backapp\core\src\main\java\com\brq\blx\persistence\UsuarioDao.java
 C:\Users\guilhermetabalipa\git\blx-backapp\core\src\main\java\com\brq\blx\persistence\ImagemDao.java
 C:\Users\guilhermetabalipa\git\blx-backapp\core\src\main\java\com\brq\blx\persistence\AlteracaoDao.java
-C:\Users\guilhermetabalipa\git\blx-backapp\core\src\main\java\com\brq\blx\persistence\HibernateUtil.java
 C:\Users\guilhermetabalipa\git\blx-backapp\core\src\main\java\com\brq\blx\entity\Categoria.java
+C:\Users\guilhermetabalipa\git\blx-backapp\core\src\main\java\com\brq\blx\infraestrutura\Repository.java
 C:\Users\guilhermetabalipa\git\blx-backapp\core\src\main\java\com\brq\blx\entity\Avaliacao.java
 C:\Users\guilhermetabalipa\git\blx-backapp\core\src\main\java\com\brq\blx\entity\Contato.java
 C:\Users\guilhermetabalipa\git\blx-backapp\core\src\main\java\com\brq\blx\entity\TipoUsuario.java

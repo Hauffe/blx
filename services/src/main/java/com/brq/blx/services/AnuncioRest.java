@@ -19,6 +19,7 @@ import com.brq.blx.entity.Anuncio;
 import com.brq.blx.persistence.AlteracaoDao;
 import com.brq.blx.persistence.AnuncioDao;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 @Path("/anuncio")
 public class AnuncioRest {
@@ -34,7 +35,7 @@ public class AnuncioRest {
 
 	public AnuncioRest() {
 		super();
-		this.gson = new Gson();
+		this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 	}
 
 	@POST
@@ -83,7 +84,7 @@ public class AnuncioRest {
 	public Response listar() {
 		try{
 			List<Anuncio> anuncios = new ArrayList<>();
-			anuncios = anuncioDao.buscarTodos();
+			anuncios = anuncioDao.buscarTodos("Anuncio");
 			if(anuncios.size() > 0) 
 				return Response.ok(gson.toJson(anuncios)).build();
 			else

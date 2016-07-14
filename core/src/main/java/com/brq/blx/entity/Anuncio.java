@@ -2,19 +2,25 @@ package com.brq.blx.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.google.gson.annotations.Expose;
 
 @Entity
 @Table(name = "BLX_ANUNCIO")
@@ -27,37 +33,57 @@ public class Anuncio implements Serializable {
 	@SequenceGenerator(name = "BLX_ANUNCIO_CODANUNCIO_GENERATOR", sequenceName = "SEQ_ID_ANUNCIO", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BLX_ANUNCIO_CODANUNCIO_GENERATOR")
 	@Column(name = "COD_ANUNCIO")
+	@Expose
 	private long codAnuncio;
 
 	@Column(name = "DS_DESCRICAO")
+	@Expose
 	private String dsDescricao;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "DT_ANUNCIO")
+	@Expose
 	private Date dtAnuncio;
 
 	@Column(name = "NM_NOME")
+	@Expose
 	private String nmNome;
 
 	@Column(name = "VL_PRECO")
+	@Expose
 	private double vlPreco;
 
 	@Column(name = "VL_STATUS")
+	@Expose
 	private Integer vlStatus;
 	
 	/* RELAÇÕES JOINCOLUMN */
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "CATEGORIA_COD_CATEGORIA")
+	@Expose
 	private Categoria blxCategoria;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "CONTATO_COD_CONTATO")
+	@Expose
 	private Contato blxContato;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "USUARIO_COD_USUARIO")
 	private Usuario blxUsuario;
+	
+	/* Relacoes  */
+	@Expose
+	@OneToMany(mappedBy="blxAnuncio", fetch=FetchType.EAGER)
+	private List<Avaliacao> blxAvaliacoes;
+	
+	@Expose
+	@OneToMany(mappedBy="blxAnuncio", fetch=FetchType.EAGER)
+	private List<Imagem> blxImagens;
+
+	@OneToMany(mappedBy="blxAnuncio", fetch=FetchType.EAGER)
+	private List<Alteracao> blxAlteracoes;
 
 	public Anuncio() {
 

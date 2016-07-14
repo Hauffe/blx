@@ -2,6 +2,9 @@ package com.brq.blx.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.google.gson.annotations.Expose;
+
 import java.util.List;
 
 @Entity
@@ -12,52 +15,70 @@ public class Usuario implements Serializable {
 
 	
 	/*
-	 * Solução do problema referente a sequência do Hibernate: Primeiramente
-	 * você deve colocar a anotação [ allocationSize = 1 ] dentro da
-	 * anotação @SequenceGenerator, caso isso não resolva, troque manualmente o
+	 * SoluÃ§Ã£o do problema referente a sequÃªncia do Hibernate: Primeiramente
+	 * vocÃª deve colocar a anotaÃ§Ã£o [ allocationSize = 1 ] dentro da
+	 * anotaÃ§Ã£o @SequenceGenerator, caso isso nÃ£o resolva, troque manualmente o
 	 * valor do incrementBy dentro do SQLDEVELOPER
 	 */
 
 	/*
-	 * OBSERVE: ALGUMAS COLUNAS QUE DEVERIAM POSSUIR A ATRIBUIÇÃO "UNIQUE" NÃO
-	 * POSSUEM A CARACTERÍSTICA DE VALOR "ÚNICO", POIS ESTAMOS EM FASE DE TESTE
-	 * LOGO MAIS ADICIONAREMOS NAS ANOTAÇÕES @Column a anotação: (unique = true)
+	 * OBSERVE: ALGUMAS COLUNAS QUE DEVERIAM POSSUIR A ATRIBUIÃ‡ÃƒO "UNIQUE" NÃƒO
+	 * POSSUEM A CARACTERÃ�STICA DE VALOR "ÃšNICO", POIS ESTAMOS EM FASE DE TESTE
+	 * LOGO MAIS ADICIONAREMOS NAS ANOTAÃ‡Ã•ES @Column a anotaÃ§Ã£o: (unique = true)
 	 */
 
 	@Id
 	@SequenceGenerator(name = "BLX_USUARIO_CODUSUARIO_GENERATOR", sequenceName = "BLXSEQ_ID_USUARIO", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BLX_USUARIO_CODUSUARIO_GENERATOR")
 	@Column(name = "COD_USUARIO")
+	@Expose
 	private long codUsuario;
 
 	@Column(name = "NM_NOME")
+	@Expose
 	private String nmNome;
 
 	@Column(name = "VL_EMAIL")
+	@Expose
 	private String vlEmail;
 
 	@Column(name = "VL_LOGIN")
+	@Expose
 	private String vlLogin;
 
 	@Column(name = "VL_RG")
+	@Expose
 	private String vlRg;
 
 	@Column(name = "VL_SENHA")
+	@Expose
 	private String vlSenha;
 
 	@Column(name = "VL_STATUS")
+	@Expose
 	private Integer vlStatus;
 
-	/* RELAÇÕES JOINCOLUMN */
+	/* RELACOES JOINCOLUMN */
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "TIPOUSUARIO_COD_TIPOUSUARIO")
-	private TipoUsuario blxTipousuario;
+	@Expose
+	private TipoUsuario blxTipoUsuario;
+	
+	/*Relacao do matheus*/
+	
+	@OneToMany(mappedBy="blxUsuario", fetch=FetchType.EAGER)
+	@Expose
+	private List<Contato> blxContatos;
+
+	@OneToMany(mappedBy="blxUsuario", fetch=FetchType.EAGER)
+	@Expose
+	private List<Anuncio> blxAnuncios;
 
 	public Usuario() {}
 
 	public Usuario(long codUsuario, String nmNome, String vlEmail, String vlLogin, String vlRg, String vlSenha,
-			Integer vlStatus, TipoUsuario blxTipousuario) {
+			Integer vlStatus, TipoUsuario blxTipoUsuario) {
 		super();
 		this.codUsuario = codUsuario;
 		this.nmNome = nmNome;
@@ -66,11 +87,11 @@ public class Usuario implements Serializable {
 		this.vlRg = vlRg;
 		this.vlSenha = vlSenha;
 		this.vlStatus = vlStatus;
-		this.blxTipousuario = blxTipousuario;
+		this.blxTipoUsuario = blxTipoUsuario;
 	}
 
 	public Usuario(long codUsuario, String nmNome, String vlEmail, String vlLogin, String vlRg, String vlSenha,
-			Integer vlStatus, List<Anuncio> blxAnuncios, List<Contato> blxContatos, TipoUsuario blxTipousuario) {
+			Integer vlStatus, List<Anuncio> blxAnuncios, List<Contato> blxContatos, TipoUsuario blxTipoUsuario) {
 		super();
 		this.codUsuario = codUsuario;
 		this.nmNome = nmNome;
@@ -79,7 +100,7 @@ public class Usuario implements Serializable {
 		this.vlRg = vlRg;
 		this.vlSenha = vlSenha;
 		this.vlStatus = vlStatus;
-		this.blxTipousuario = blxTipousuario;
+		this.blxTipoUsuario = blxTipoUsuario;
 	}
 
 	public long getCodUsuario() {
@@ -139,17 +160,41 @@ public class Usuario implements Serializable {
 	}
 
 	public TipoUsuario getBlxTipousuario() {
-		return blxTipousuario;
+		return blxTipoUsuario;
 	}
 
-	public void setBlxTipousuario(TipoUsuario blxTipousuario) {
-		this.blxTipousuario = blxTipousuario;
+	public void setBlxTipousuario(TipoUsuario blxTipoUsuario) {
+		this.blxTipoUsuario = blxTipoUsuario;
+	}
+	
+	public TipoUsuario getBlxTipoUsuario() {
+		return blxTipoUsuario;
+	}
+
+	public void setBlxTipoUsuario(TipoUsuario blxTipoUsuario) {
+		this.blxTipoUsuario = blxTipoUsuario;
+	}
+
+	public List<Contato> getBlxContatos() {
+		return blxContatos;
+	}
+
+	public void setBlxContatos(List<Contato> blxContatos) {
+		this.blxContatos = blxContatos;
+	}
+
+	public List<Anuncio> getBlxAnuncios() {
+		return blxAnuncios;
+	}
+
+	public void setBlxAnuncios(List<Anuncio> blxAnuncios) {
+		this.blxAnuncios = blxAnuncios;
 	}
 
 	@Override
 	public String toString() {
 		return "Usuario [codUsuario=" + codUsuario + ", nmNome=" + nmNome + ", vlEmail=" + vlEmail + ", vlLogin="
 				+ vlLogin + ", vlRg=" + vlRg + ", vlSenha=" + vlSenha + ", vlStatus=" + vlStatus + ", blxTipousuario="
-				+ blxTipousuario + "]";
+				+ blxTipoUsuario + "]";
 	}
 }

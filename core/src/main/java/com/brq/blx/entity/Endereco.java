@@ -3,6 +3,8 @@ package com.brq.blx.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Table(name = "BLX_ENDERECO")
 @NamedQuery(name = "Endereco.findAll", query = "SELECT b FROM Endereco b")
@@ -14,26 +16,33 @@ public class Endereco implements Serializable {
 	@SequenceGenerator(name = "BLX_ENDERECO_CODENDERECO_GENERATOR", sequenceName = "SEQ_ID_ENDERECO", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BLX_ENDERECO_CODENDERECO_GENERATOR")
 	@Column(name = "COD_ENDERECO")
+	@Expose
 	private long codEndereco;
 
+	@Expose
 	@Column(name = "VL_CEP")
 	private String vlCep;
 
+	@Expose
 	@Column(name = "VL_CIDADE")
 	private String vlCidade;
 	
+	@Expose
 	@Column(name = "VL_NUMERO")
 	private Integer vlNumero;
 
+	@Expose
 	@Column(name = "VL_RUA")
 	private String vlRua;
 
+	@Expose
 	@Column(name = "VL_UF")
 	private String vlUf;
 	
 	/* RELAÇÕES JOINCOLUMN */
 
-	@OneToOne(mappedBy="blxEndereco", fetch=FetchType.EAGER)
+	@ManyToOne
+	@JoinColumn(name="CONTATO_COD_CONTATO")
 	private Contato blxContato;
 
 	public Endereco() {}

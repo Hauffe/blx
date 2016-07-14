@@ -3,6 +3,8 @@ package com.brq.blx.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Table(name="BLX_IMAGEM")
 @NamedQuery(name="Imagem.findAll", query="SELECT b FROM Imagem b")
@@ -13,11 +15,14 @@ public class Imagem implements Serializable {
 	@SequenceGenerator(name="BLX_IMAGEM_CODIMAGEM_GENERATOR", sequenceName="SEQ_ID_IMAGEM", allocationSize = 1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BLX_IMAGEM_CODIMAGEM_GENERATOR")
 	@Column(name="COD_IMAGEM")
+	@Expose
 	private long codImagem;
 
+	@Expose
 	@Column(name="NM_NOME")
 	private String nmNome;
 
+	@Expose
 	@Column(name="VL_CAMINHO")
 	private String vlCaminho;
 	

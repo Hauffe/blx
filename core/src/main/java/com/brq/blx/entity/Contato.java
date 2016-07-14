@@ -3,6 +3,8 @@ package com.brq.blx.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.List;
 
 @Entity
@@ -15,24 +17,32 @@ public class Contato implements Serializable {
 	@SequenceGenerator(name = "BLX_CONTATO_CODCONTATO_GENERATOR", sequenceName = "SEQ_ID_CONTATO", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BLX_CONTATO_CODCONTATO_GENERATOR")
 	@Column(name = "COD_CONTATO")
+	@Expose
 	private long codContato;
 
 	@Column(name = "VL_TELEFONEFIXO")
+	@Expose
 	private String vlTelefoneFixo;
 
 	@Column(name = "VL_TELEFONEMOVEL")
+	@Expose
 	private String vlTelefoneMovel;
 	
 
 	/* RELAÇÕES JOINCOLUMN */
-	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ENDERECO_COD_ENDERECO")
+	@Expose
 	private Endereco blxEndereco;
 	
 	@ManyToOne
 	@JoinColumn(name = "USUARIO_COD_USUARIO") 
 	private Usuario blxUsuario;
+	
+	/*Relacoes*/
+	
+	@OneToMany(mappedBy="blxContato", fetch=FetchType.EAGER)
+	private List<Anuncio> blxAnuncios;
 
 	public Contato() {}
 

@@ -41,8 +41,8 @@ public abstract class AbstractRepository<E> implements Repository<E>{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<E> buscarTodos() {
-		return this.entityManager.createQuery("FROM " + this.entityType).getResultList();
+	public List<E> buscarTodos(String className) {
+		return this.entityManager.createQuery("FROM " + className).getResultList();
 	}
 
 	@Override
