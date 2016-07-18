@@ -3,6 +3,8 @@ package com.brq.blx.persistence;
 import java.util.List;
 
 import javax.enterprise.context.Dependent;
+
+import com.brq.blx.entity.Alteracao;
 import com.brq.blx.entity.Usuario;
 import com.brq.blx.infraestrutura.AbstractRepository;
 
@@ -29,5 +31,11 @@ public class UsuarioDao extends AbstractRepository<Usuario> {
 				.getResultList();
 	
 		return usuarios;
+	}
+	
+	@Override
+	public Usuario buscarPorId(long id) {
+		return (Usuario) this.entityManager.createQuery("FROM Usuario WHERE codUsuario = :id")
+											  .setParameter("id", id).getSingleResult();
 	}
 }

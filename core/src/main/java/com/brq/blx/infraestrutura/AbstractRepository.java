@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 public abstract class AbstractRepository<E> implements Repository<E>{
 
@@ -13,13 +14,10 @@ public abstract class AbstractRepository<E> implements Repository<E>{
 	@PersistenceContext(unitName="DataSourceBLX")
 	protected EntityManager entityManager;
 
-	@SuppressWarnings("unchecked")
-	public AbstractRepository() {
-		ParameterizedType  parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
-		this.entityType = ( Class<E> ) parameterizedType.getActualTypeArguments()[0];
-	}
+	public AbstractRepository() {}
 
 	@Override
+	@Transactional
 	public boolean cadastrar(E entity) {
 		if (entity != null)
 		{
@@ -44,13 +42,4 @@ public abstract class AbstractRepository<E> implements Repository<E>{
 	public List<E> buscarTodos(String className) {
 		return this.entityManager.createQuery("FROM " + className).getResultList();
 	}
-
-	@Override
-	public E buscarPorId(long id) {
-		return this.entityManager.find(this.entityType, id);	
-	}
-
-	
-	
-	
 }

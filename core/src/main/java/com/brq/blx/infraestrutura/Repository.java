@@ -10,6 +10,6 @@ public interface Repository<E> {
 	
 	public List<E> buscarTodos ( String className );
 	
-	public E buscarPorId (long id);
+	public E buscarPorId ( long id );
 	
 }

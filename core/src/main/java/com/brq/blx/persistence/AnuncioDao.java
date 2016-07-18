@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.enterprise.context.Dependent;
 
+import com.brq.blx.entity.Alteracao;
 import com.brq.blx.entity.Anuncio;
 import com.brq.blx.infraestrutura.AbstractRepository;
 
@@ -22,5 +23,11 @@ public class AnuncioDao extends AbstractRepository<Anuncio> {
 				.getResultList();
 			
 		return anuncios;
+	}
+	
+	@Override
+	public Anuncio buscarPorId(long id) {
+		return (Anuncio) this.entityManager.createQuery("FROM Anuncio WHERE codAnuncio = :id")
+											  .setParameter("id", id).getSingleResult();
 	}
 }

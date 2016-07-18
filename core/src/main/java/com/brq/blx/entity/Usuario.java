@@ -45,10 +45,14 @@ public class Usuario implements Serializable {
 	@Column(name = "VL_LOGIN")
 	@Expose
 	private String vlLogin;
-
-	@Column(name = "VL_RG")
+	
+	@Column(name = "VL_SKYPE")
 	@Expose
-	private String vlRg;
+	private String vlSkype;
+
+	@Column(name = "VL_CPF")
+	@Expose
+	private String vlCpf;
 
 	@Column(name = "VL_SENHA")
 	@Expose
@@ -77,27 +81,27 @@ public class Usuario implements Serializable {
 
 	public Usuario() {}
 
-	public Usuario(long codUsuario, String nmNome, String vlEmail, String vlLogin, String vlRg, String vlSenha,
+	public Usuario(long codUsuario, String nmNome, String vlEmail, String vlLogin, String vlCpf, String vlSenha,
 			Integer vlStatus, TipoUsuario blxTipoUsuario) {
 		super();
 		this.codUsuario = codUsuario;
 		this.nmNome = nmNome;
 		this.vlEmail = vlEmail;
 		this.vlLogin = vlLogin;
-		this.vlRg = vlRg;
+		this.vlCpf = vlCpf;
 		this.vlSenha = vlSenha;
 		this.vlStatus = vlStatus;
 		this.blxTipoUsuario = blxTipoUsuario;
 	}
 
-	public Usuario(long codUsuario, String nmNome, String vlEmail, String vlLogin, String vlRg, String vlSenha,
+	public Usuario(long codUsuario, String nmNome, String vlEmail, String vlLogin, String vlCpf, String vlSenha,
 			Integer vlStatus, List<Anuncio> blxAnuncios, List<Contato> blxContatos, TipoUsuario blxTipoUsuario) {
 		super();
 		this.codUsuario = codUsuario;
 		this.nmNome = nmNome;
 		this.vlEmail = vlEmail;
 		this.vlLogin = vlLogin;
-		this.vlRg = vlRg;
+		this.vlCpf = vlCpf;
 		this.vlSenha = vlSenha;
 		this.vlStatus = vlStatus;
 		this.blxTipoUsuario = blxTipoUsuario;
@@ -135,12 +139,12 @@ public class Usuario implements Serializable {
 		this.vlLogin = vlLogin;
 	}
 
-	public String getVlRg() {
-		return this.vlRg;
+	public String getVlCpf() {
+		return this.vlCpf;
 	}
 
-	public void setVlRg(String vlRg) {
-		this.vlRg = vlRg;
+	public void setVlCpf(String vlCpf) {
+		this.vlCpf = vlCpf;
 	}
 
 	public String getVlSenha() {
@@ -157,14 +161,6 @@ public class Usuario implements Serializable {
 
 	public void setVlStatus(Integer vlStatus) {
 		this.vlStatus = vlStatus;
-	}
-
-	public TipoUsuario getBlxTipousuario() {
-		return blxTipoUsuario;
-	}
-
-	public void setBlxTipousuario(TipoUsuario blxTipoUsuario) {
-		this.blxTipoUsuario = blxTipoUsuario;
 	}
 	
 	public TipoUsuario getBlxTipoUsuario() {
@@ -191,10 +187,18 @@ public class Usuario implements Serializable {
 		this.blxAnuncios = blxAnuncios;
 	}
 
+	public String getVlSkype() {
+		return vlSkype;
+	}
+
+	public void setVlSkype(String vlSkype) {
+		this.vlSkype = vlSkype;
+	}
+
 	@Override
 	public String toString() {
 		return "Usuario [codUsuario=" + codUsuario + ", nmNome=" + nmNome + ", vlEmail=" + vlEmail + ", vlLogin="
-				+ vlLogin + ", vlRg=" + vlRg + ", vlSenha=" + vlSenha + ", vlStatus=" + vlStatus + ", blxTipousuario="
+				+ vlLogin + ", vlRg=" + vlCpf + ", vlSenha=" + vlSenha + ", vlStatus=" + vlStatus + ", blxTipousuario="
 				+ blxTipoUsuario + "]";
 	}
 }

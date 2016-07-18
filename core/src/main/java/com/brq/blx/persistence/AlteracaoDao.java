@@ -8,4 +8,10 @@ import com.brq.blx.infraestrutura.AbstractRepository;
 @Dependent
 public class AlteracaoDao extends AbstractRepository<Alteracao> {
 
+	@Override
+	public Alteracao buscarPorId(long id) {
+		return (Alteracao) this.entityManager.createQuery("FROM Alteracao WHERE codAlteracao = :id")
+											  .setParameter("id", id).getSingleResult();
+	}
+ 
 }

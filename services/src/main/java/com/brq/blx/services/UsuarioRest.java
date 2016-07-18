@@ -14,8 +14,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.brq.blx.entity.Contato;
+import com.brq.blx.entity.TipoUsuario;
 import com.brq.blx.entity.Usuario;
 import com.brq.blx.persistence.ContatoDao;
+import com.brq.blx.persistence.TipoUsuarioDao;
 import com.brq.blx.persistence.UsuarioDao;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -30,6 +32,9 @@ public class UsuarioRest {
 
 	@Inject
 	private ContatoDao contatoDao;
+	
+	@Inject
+	private TipoUsuarioDao tipoUsuarioDao;
 
 	public UsuarioRest() {
 		super();
@@ -40,15 +45,15 @@ public class UsuarioRest {
 	@Path("/cadastrar")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response cadastrar(Contato c) {
+	public Response cadastrar(Usuario u) {
 		try {
-			// Cadastro do usuario
-			Usuario u = c.getBlxUsuario();
 			u.setVlStatus(1);
+			u.setBlxTipoUsuario(tipoUsuarioDao.buscarPorId(1));
+			u.getBlxContatos().get(0).setBlxUsuario(u);
+			
 			usuarioDao.cadastrar(u);
-
-			// Cadastro do contato
-			contatoDao.cadastrar(c);
+			
+			contatoDao.cadastrar(u.getBlxContatos().get(0));
 
 			return Response.ok(gson.toJson("Usuario cadastrado!")).build();
 		} catch (Exception e) {
