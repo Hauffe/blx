@@ -41,7 +41,7 @@ public class Endereco implements Serializable {
 	
 	/* RELAÇÕES JOINCOLUMN */
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="CONTATO_COD_CONTATO")
 	private Contato blxContato;
 

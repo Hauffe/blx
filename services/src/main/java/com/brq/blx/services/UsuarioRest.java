@@ -13,8 +13,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.brq.blx.entity.Contato;
-import com.brq.blx.entity.TipoUsuario;
 import com.brq.blx.entity.Usuario;
 import com.brq.blx.persistence.ContatoDao;
 import com.brq.blx.persistence.TipoUsuarioDao;
@@ -48,11 +46,9 @@ public class UsuarioRest {
 	public Response cadastrar(Usuario u) {
 		try {
 			u.setVlStatus(1);
-			u.setBlxTipoUsuario(tipoUsuarioDao.buscarPorId(1));
+			u.setBlxTipoUsuario(tipoUsuarioDao.buscarPorId(2));
 			u.getBlxContatos().get(0).setBlxUsuario(u);
-			
-			usuarioDao.cadastrar(u);
-			
+						
 			contatoDao.cadastrar(u.getBlxContatos().get(0));
 
 			return Response.ok(gson.toJson("Usuario cadastrado!")).build();
@@ -83,10 +79,7 @@ public class UsuarioRest {
 	public Response autenticar(Usuario u) {
 		try {
 			Usuario usuario = usuarioDao.buscarPorLogin(u);
-			if(usuario != null)
-				return Response.ok(gson.toJson(usuario)).build();
-
-			return Response.ok(gson.toJson("usuario nao existe")).build();
+			return Response.ok(gson.toJson(usuario)).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Response.ok(gson.toJson("Erro ao acessar servidor")).build();
