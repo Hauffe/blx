@@ -68,6 +68,16 @@ public class Avaliacao implements Serializable {
 	public void setVlNota(String vlNota) {
 		this.vlNota = vlNota;
 	}
+	
+	
+
+	public Anuncio getBlxAnuncio() {
+		return blxAnuncio;
+	}
+
+	public void setBlxAnuncio(Anuncio blxAnuncio) {
+		this.blxAnuncio = blxAnuncio;
+	}
 
 	@Override
 	public String toString() {

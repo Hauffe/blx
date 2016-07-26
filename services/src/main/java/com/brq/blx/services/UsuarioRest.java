@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 @Path("/usuario")
+
 public class UsuarioRest {
 
 	private Gson gson;
@@ -46,11 +47,14 @@ public class UsuarioRest {
 	public Response cadastrar(Usuario u) {
 		try {
 			u.setVlStatus(1);
+			System.out.println("USUÁRIO :::" + u);
 			u.setBlxTipoUsuario(tipoUsuarioDao.buscarPorId(2));
-			u.getBlxContato().setBlxUsuario(u);
-					
-//			contatoDao.cadastrar(u.getBlxContato());
-
+			
+			
+						
+			//contatoDao.cadastrar(u.getBlxContato());
+			usuarioDao.cadastrar(u)	;		
+			
 			return Response.ok(gson.toJson("Usuario cadastrado!")).build();
 		} catch (Exception e) {
 			e.printStackTrace();

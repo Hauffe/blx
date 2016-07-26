@@ -16,6 +16,8 @@ public class ApplicationConfig extends Application {
 		classes.add(UsuarioRest.class);
 		classes.add(AvaliacaoRest.class);
 		classes.add(AnuncioRest.class);
+		classes.add(CategoriaRest.class);
+		classes.add(ChatRest.class);
 		
 		return classes;
 	}

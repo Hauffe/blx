@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -16,12 +17,17 @@ import javax.ws.rs.core.Response;
 
 import com.brq.blx.entity.Alteracao;
 import com.brq.blx.entity.Anuncio;
+import com.brq.blx.entity.Usuario;
 import com.brq.blx.persistence.AlteracaoDao;
 import com.brq.blx.persistence.AnuncioDao;
+import com.brq.blx.persistence.CategoriaDao;
+import com.brq.blx.persistence.ContatoDao;
+import com.brq.blx.persistence.UsuarioDao;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 @Path("/anuncio")
+@Stateless
 public class AnuncioRest {
 	
 	@Inject
@@ -29,6 +35,16 @@ public class AnuncioRest {
 	
 	@Inject
 	private AlteracaoDao alteracaoDao;
+	
+	@Inject
+	private UsuarioDao usuarioDao;
+	
+	@Inject
+	private CategoriaDao categoriaDao;
+	
+	@Inject
+	private ContatoDao contatoDao;
+	
 
 	
 	private Gson gson;
@@ -44,10 +60,19 @@ public class AnuncioRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response cadastrar(Anuncio a) {
 		try{
-			a.setDtAnuncio(new Date());
+		
 			a.setVlStatus(1);
+			a.setDtAnuncio(new Date());
+			System.out.println("CONTATO DO ANÚNCIO: " + a.getBlxContato());
+		/*	contatoDao.cadastrar(a.getBlxContato());*/
+			a.setBlxCategoria(categoriaDao.buscarPorId(1));
+			a.setBlxContato(a.getBlxUsuario().getBlxContato());
+			System.out.println("ANUNCIO: " + a);
+			System.out.println("Categoria: " + categoriaDao.buscarPorId(1));
+			System.out.println("USUÁRIO DO ANÚNCIO: " + a.getBlxUsuario());
 			
 			anuncioDao.cadastrar(a);
+			
 			return Response.ok(gson.toJson("Anuncio cadastrado!")).build();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -62,6 +87,13 @@ public class AnuncioRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response alterar(Anuncio a) {
 		try{
+			
+			Usuario users = usuarioDao.buscarPorId(1);
+			
+			System.out.println("USUÁRIO " + users);
+			
+			a.setBlxUsuario(users);
+			
 			anuncioDao.atualizar(a);
 			
 			// cadastro de alteracao
@@ -96,7 +128,7 @@ public class AnuncioRest {
 	}
 	
 	@GET
-	@Path("/pegarAnuncio/{id}")
+	@Path("/buscarAnuncioPorId/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response anuncio(@PathParam("id") String id) {
 		try{
