@@ -29,7 +29,7 @@ public class Contato implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BLX_CONTATO_CODCONTATO_GENERATOR", sequenceName="SEQ_ID_CONTATO")
+	@SequenceGenerator(name="BLX_CONTATO_CODCONTATO_GENERATOR", sequenceName="SEQ_ID_CONTATO", allocationSize = 1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BLX_CONTATO_CODCONTATO_GENERATOR")
 	@Column(name="COD_CONTATO")
 	@Expose

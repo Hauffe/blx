@@ -37,7 +37,7 @@ public class Anuncio implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BLX_ANUNCIO_CODANUNCIO_GENERATOR", sequenceName="SEQ_ID_ANUNCIO")
+	@SequenceGenerator(name="BLX_ANUNCIO_CODANUNCIO_GENERATOR", sequenceName="SEQ_ID_ANUNCIO", allocationSize = 1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BLX_ANUNCIO_CODANUNCIO_GENERATOR")
 	@Column(name="COD_ANUNCIO")
 	@Expose

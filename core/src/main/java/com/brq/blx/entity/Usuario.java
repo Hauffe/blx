@@ -30,7 +30,7 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BLX_USUARIO_CODUSUARIO_GENERATOR", sequenceName="SEQ_ID_USUARIO")
+	@SequenceGenerator(name="BLX_USUARIO_CODUSUARIO_GENERATOR", sequenceName="SEQ_ID_USUARIO", allocationSize = 1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BLX_USUARIO_CODUSUARIO_GENERATOR")
 	@Column(name="COD_USUARIO")
 	@Expose
@@ -78,7 +78,7 @@ public class Usuario implements Serializable {
 	private List<Notificacao> blxNotificacaos2;
 
 	//bi-directional many-to-one association to Contato
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="CONTATO_COD_CONTATO")
 	@Expose
 	private Contato blxContato;
