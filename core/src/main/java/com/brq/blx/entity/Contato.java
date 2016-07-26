@@ -35,8 +35,7 @@ public class Contato implements Serializable {
 	@Expose
 	private Endereco blxEndereco;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "USUARIO_COD_USUARIO") 
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="blxContato")
 	private Usuario blxUsuario;
 	
 	/*Relacoes*/

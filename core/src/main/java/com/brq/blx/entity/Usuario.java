@@ -71,9 +71,10 @@ public class Usuario implements Serializable {
 	
 	/*Relacao do matheus*/
 	
-	@OneToMany(mappedBy="blxUsuario", fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name = "CONTATO_COD_CONTATO")
 	@Expose
-	private List<Contato> blxContatos;
+	private Contato blxContato;
 
 	@OneToMany(mappedBy="blxUsuario", fetch=FetchType.EAGER)
 	@Expose
@@ -171,12 +172,12 @@ public class Usuario implements Serializable {
 		this.blxTipoUsuario = blxTipoUsuario;
 	}
 
-	public List<Contato> getBlxContatos() {
-		return blxContatos;
+	public Contato getBlxContato() {
+		return blxContato;
 	}
 
-	public void setBlxContatos(List<Contato> blxContatos) {
-		this.blxContatos = blxContatos;
+	public void setBlxContato(Contato blxContato) {
+		this.blxContato = blxContato;
 	}
 
 	public List<Anuncio> getBlxAnuncios() {

@@ -28,6 +28,7 @@ public abstract class AbstractRepository<E> implements Repository<E>{
 	}
 
 	@Override
+	@Transactional
 	public boolean atualizar(E entity) {
 		if(entity != null)
 		{

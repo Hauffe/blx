@@ -47,9 +47,9 @@ public class UsuarioRest {
 		try {
 			u.setVlStatus(1);
 			u.setBlxTipoUsuario(tipoUsuarioDao.buscarPorId(2));
-			u.getBlxContatos().get(0).setBlxUsuario(u);
-						
-			contatoDao.cadastrar(u.getBlxContatos().get(0));
+			u.getBlxContato().setBlxUsuario(u);
+					
+//			contatoDao.cadastrar(u.getBlxContato());
 
 			return Response.ok(gson.toJson("Usuario cadastrado!")).build();
 		} catch (Exception e) {
