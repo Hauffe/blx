@@ -1,4 +1,4 @@
-package com.brq.blx.services;
+﻿package com.brq.blx.services;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,6 +25,9 @@ import com.brq.blx.persistence.ContatoDao;
 import com.brq.blx.persistence.UsuarioDao;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+
+
 
 @Path("/anuncio")
 @Stateless
